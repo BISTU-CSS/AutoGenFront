@@ -3,7 +3,7 @@
         <el-row>
         </el-row>
         <el-row>
-            <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tabs v-model="activeName">
                 <el-tab-pane label="项目基本信息" name="zero">
                     <el-form ref="form" :model="form" label-width="80px">
                         项目名称<br>
@@ -31,7 +31,7 @@
                         </el-form-item>
                     </el-form>
                 </el-tab-pane>
-                <el-tab-pane label="网络和通信" name="second">
+                <!-- <el-tab-pane label="网络和通信" name="second">
                     <el-form ref="form" :model="form" label-width="80px">
                         <el-form-item label="问题1">
                             身份鉴别<br>
@@ -59,7 +59,7 @@
                             </el-cascader>
                         </el-form-item>  
                     </el-form>  
-                </el-tab-pane>
+                </el-tab-pane> -->
                 <el-tab-pane label="设备和计算" name="third">
                     <el-form ref="form" :model="form" label-width="80px">
                         <el-form-item label="问题1">
@@ -153,7 +153,7 @@
                         </el-form-item>
                         <el-form-item label="问题2">
                             网络和通信安全<br>
-                            <el-cascader v-model="ts_wlhtxaq_form" :options="ts_wlhtxaq_options" :props="props" style="width: 90%;" clearable>
+                            <el-cascader v-model="ts_wlhtxaq_form" :options="ts_wlhtxaq_options" placeholder="多选" :props="props" style="width: 90%;" clearable>
                             </el-cascader>
                         </el-form-item>
                         <el-form-item label="问题3">
@@ -205,6 +205,7 @@ import {ts_wlhtxaq_data} from "./data/ts/wlhtxaq.js"
 export default {
     data () {
         return {
+            form: {},
             sysname: '',
             activeName: 'first',
             radio:'1',
@@ -217,16 +218,16 @@ export default {
             wlhhj_spjk_form:[],
             wlhhj_spjk_options: wlhhj_spjkjlsjccwzx_data,
             //网络和通信-选择表单
-            wlhtx_sfjb_form:[],
-            //wlhtx_sfbj_options:,
-            wlhtx_sjwzx_form:[],
-            //wlhtx_sjwzx_options:,
-            wlhtx_sjjmx_form:[],
-            //wlhtx_sjjmx_options:,
-            wlhtx_wlbj_form:[],
-            //wlhtx_wlbj_options:,
-            wlhtx_aqjr_form:[],
-            //wlhtx_aqjr_options:
+            // wlhtx_sfjb_form:[],
+            // wlhtx_sfbj_options:,
+            // wlhtx_sjwzx_form:[],
+            // wlhtx_sjwzx_options:,
+            // wlhtx_sjjmx_form:[],
+            // wlhtx_sjjmx_options:,
+            // wlhtx_wlbj_form:[],
+            // wlhtx_wlbj_options:,
+            // wlhtx_aqjr_form:[],
+            // wlhtx_aqjr_options:,
             //设备和计算-选择表单
             sbhjs_sfjb_form:[],
             sbhjs_sfjb_options:sbhjs_sfjb_data,
@@ -271,17 +272,30 @@ export default {
             this.$refs.multipleTable.clearSelection()
         },
         getStore () {
+            var yyhsj_sfjb_form_format = [];
+            for (let index = 0; index < this.yyhsj_sfjb_form.length; index++) {
+                yyhsj_sfjb_form_format.push(this.yyhsj_sfjb_form[index][1]);
+            }
+            var yyhsj_csjmx_form_format = [];
+            for (let index = 0; index < this.yyhsj_csjmx_form.length; index++) {
+                yyhsj_csjmx_form_format.push(this.yyhsj_csjmx_form[index][1]);
+            }
+            var ts_wlhtxaq_form_format = [];
+            for (let index = 0; index < this.ts_wlhtxaq_form.length; index++) {
+                ts_wlhtxaq_form_format.push(this.ts_wlhtxaq_form[index][1]);
+            }
+            //alert(ts_wlhtxaq_form_format)
             let data = {
                 sys_name:this.sysname,
                 wlhhj_sfjb:this.wlhhj_sfjb_form[1],
                 wlhhj_dzmj:this.wlhhj_dzmj_form[1],
                 wlhhj_spjk:this.wlhhj_spjk_form[1],
 
-                wlhtx_sfjb:this.wlhtx_sfjb_form[1],
-                wlhtx_sjwzx:this.wlhtx_sjwzx_form[1],
-                wlhtx_sjjmx:this.wlhtx_sjjmx_form[1],
-                wlhtx_wlbj:this.wlhtx_wlbj_form[1],
-                wlhtx_aqjr:this.wlhtx_aqjr_form[1],
+                // wlhtx_sfjb:this.wlhtx_sfjb_form[1],
+                // wlhtx_sjwzx:this.wlhtx_sjwzx_form[1],
+                // wlhtx_sjjmx:this.wlhtx_sjjmx_form[1],
+                // wlhtx_wlbj:this.wlhtx_wlbj_form[1],
+                // wlhtx_aqjr:this.wlhtx_aqjr_form[1],
 
                 sbhjs_sfjb:this.sbhjs_sfjb_form[1],
                 sbhjs_ycgl:this.sbhjs_ycgl_form[1],
@@ -290,29 +304,31 @@ export default {
                 sbhjs_rzjl:this.sbhjs_rzjl_form[1],
                 sbhjs_zykz:this.sbhjs_zykzx_form[1],
 
-                yyhsj_sfjb:this.yyhsj_sfjb_form,
+                yyhsj_sfjb:yyhsj_sfjb_form_format,
                 yyhsj_fwkz:this.yyhsj_fwkz_form[1],
                 yyhsj_xxzy:this.yyhsj_xxzy_form[1],
-                yyhsj_csjmx:this.yyhsj_csjmx_form,
+                yyhsj_csjmx:yyhsj_csjmx_form_format,
                 yyhsj_ccjmx:this.yyhsj_ccjmx_form[1],
                 yyhsj_cswzx:this.yyhsj_cswzx_form[1],
                 yyhsj_ccwzx:this.yyhsj_ccwzx_form[1],
                 yyhsj_bkfr:this.yyhsj_bkfr_form[1],
 
                 ts_glzd:this.ts_glzd_form,
-                ts_wlhtxaq:this.ts_wlhtxaq_form,
+                ts_wlhtxaq:ts_wlhtxaq_form_format,
                 ts_mmyy:this.ts_mmyy_form,
 
             }
             var jsonData = JSON.stringify(data)
-        alert(jsonData)
+            //alert(jsonData)
 
-            // axios.post('/api/ww',data
-            // ).then(function(response){
-            //     alert(response)
-            // }).catch(function(error){
-            //     alert(error)
-            // })
+            axios.post('/api/demo',{
+                "data":data,
+            }
+            ).then(function(response){
+                alert(response)
+            }).catch(function(error){
+                alert(error)
+            })
         }
     },
 }
