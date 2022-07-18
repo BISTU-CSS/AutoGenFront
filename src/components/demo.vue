@@ -321,11 +321,20 @@ export default {
             var jsonData = JSON.stringify(data)
             //alert(jsonData)
 
-            axios.post('/api/demo',{
+            axios.post('/api/download',{
                 "data":data,
+            },{                
+                responseType:'blob'
             }
             ).then(function(response){
-                alert(response)
+                var aTag = document.createElement('a')
+                let tmp = response.data
+                var blob = new Blob([tmp])
+                aTag.download = "测试文档.docx"
+                aTag.href = URL.createObjectURL(tmp)
+                aTag.click()
+                //var responseData = JSON.stringify(response)
+                //alert(responseData)
             }).catch(function(error){
                 alert(error)
             })
