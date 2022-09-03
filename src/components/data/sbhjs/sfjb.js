@@ -20,7 +20,7 @@ const sbhjs_sfjb_data = [
         value: '31-02',
         label: '不使用堡垒机，采用证书验证',
         children: [{
-            value: '31-01-1',
+            value: '31-02-1',
             label: '服务器密码机、签名验签服务器、USBKEY、国密安全密码应用中间件'
             }]
     },{

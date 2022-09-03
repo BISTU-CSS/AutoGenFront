@@ -1,8 +1,6 @@
 <template>
     <div>
         <el-row>
-        </el-row>
-        <el-row>
             <el-tabs v-model="activeName">
                 <el-tab-pane label="项目基本信息" name="zero">
                     <el-form ref="form" :model="form" label-width="80px">

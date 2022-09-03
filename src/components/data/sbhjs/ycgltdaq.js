@@ -13,7 +13,7 @@ const sbhjs_ycgltdaq_data = [
         value: '32-01',
         label: '不使用堡垒机',
         children: [{
-            value: '32-00-1',
+            value: '32-01-1',
             label: '具有商密证书设备、通用服务器'
             }]
     },

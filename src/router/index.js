@@ -6,24 +6,33 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/Section531',
-      name: 'Section531',
-      component: () => import('@/components/Section531')
+      path: '/middletable',
+      name: 'Middletable',
+      component: () => import('@/components/middletable')
+    },
+    // {
+    //   path: '/demo',
+    //   name: 'Demo',
+    //   component: () => import('@/components/demo')
+    // },
+    {
+      path: '/questionnaire',
+      name: 'questionnaire',
+      component: () => import('@/components/questionnaire'),
+      beforeEnter: (to, from, next) => {  
+        next()
+     }
+      //http://localhost:8080/#/questionnaire/
     },
     {
-      path: '/',
-      name: 'demo',
-      component: () => import('@/components/demo')
+      path: '/choose',
+      name: 'choose',
+      component: () => import('@/components/choose')
+    },{
+      path: '/addque',
+      name: 'addque',
+      component: () => import('@/components/addque')
     },
-    {
-      path: '/device',
-      name: 'ChooseDevice',
-      component: () => import('@/components/ChooseDevice')
-    },
-    {
-      path: '/test',
-      name: 'test',
-      component: () => import('@/components/test')
-    }
+
   ]
 })

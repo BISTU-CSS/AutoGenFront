@@ -28,7 +28,7 @@ const wlhhj_sfjb_data = [
         value: '11-02',
         label: '租机房，已经有门禁，合规',
         children: [{
-            value: '11-02',
+            value: '11-02-1',
             label: '无'
         }]
     },
@@ -47,7 +47,7 @@ const wlhhj_sfjb_data = [
         value: '11-04',
         label: '旧机房，已经有门禁，合规',
         children: [{
-            value: '11-04',
+            value: '11-04-1',
             label: '无'
         }]
     },
@@ -63,7 +63,7 @@ const wlhhj_sfjb_data = [
         value: '11-06',
         label: '没有这个问题、不涉及',
         children: [{
-            value: '11-06',
+            value: '11-06-1',
             label: '无'
         }]
     },
@@ -71,7 +71,7 @@ const wlhhj_sfjb_data = [
         value: '11-07',
         label: '以上都不是',
         children: [{
-            value: '11-07',
+            value: '11-07-1',
             label: '无'
         }]
     },
