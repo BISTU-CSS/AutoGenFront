@@ -17,25 +17,25 @@
         <br><br><br>
         <div v-loading="loading">
             <el-form ref="form" :model="Form" label-width="100px">
-            <el-form-item label="项目名称">
-                <el-input v-model="xmmc"></el-input>
-            </el-form-item>
-            <br>
-            <el-form-item label="创建人">
-                <el-input v-model="cjr"></el-input>
-            </el-form-item>
-            <br>
-            <el-form-item label="指导老师">
-                <el-input v-model="zdls"></el-input>
-            </el-form-item>
-            <br>
-            <el-form-item label="项目说明">
-                <el-input type="textarea" v-model="xmsm" :autosize="{ minRows: 4, maxRows: 8}"></el-input>
-            </el-form-item>
-            <br>
-            <el-form-item>
-                <el-button type="primary" @click="addTemplate">立即创建</el-button>
-            </el-form-item>
+              <el-form-item label="项目名称">
+                  <el-input v-model="xmmc"></el-input>
+              </el-form-item>
+              <br>
+              <el-form-item label="创建人">
+                  <el-input v-model="cjr"></el-input>
+              </el-form-item>
+              <br>
+              <el-form-item label="指导老师">
+                  <el-input v-model="zdls"></el-input>
+              </el-form-item>
+              <br>
+              <el-form-item label="项目说明">
+                  <el-input type="textarea" v-model="xmsm" :autosize="{ minRows: 4, maxRows: 8}"></el-input>
+              </el-form-item>
+              <br>
+              <el-form-item>
+                  <el-button type="primary" @click="addTemplate">立即创建</el-button>
+              </el-form-item>
             </el-form>
         </div>
     </div>
@@ -50,11 +50,11 @@ import axios from "axios"
       return {
         loading: false,
         Form: {},
-        activeIndex:'1',
         xmmc:'',
         cjr:'',
         zdls:'',
-        xmsm:''
+        xmsm:'',
+        activeIndex:'1',
       }
     },
 
@@ -97,3 +97,5 @@ import axios from "axios"
     }
   }
 </script>
+
+
