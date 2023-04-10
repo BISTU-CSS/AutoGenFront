@@ -139,9 +139,9 @@ import axios from "axios"
                   {sbmc:'数据库服务器',czxt:'1',sjk:'2',sl:'1',ppxh:'',ycyw:'1',sfrz:['1'],blj:'1',}
                 ],      //sbhjs_fwq
                 sys_sbhjs:[
-                  {type:'2',sbmc:'SSL VPN',ppxh:'',sl:'1',gmsf:'2',smzs:'1',ycyw:'1',sfrz:['1'],blj:'1'},
-                  {type:'2',sbmc:'IPsec VPN',ppxh:'',sl:'1',gmsf:'2',smzs:'1',ycyw:'1',sfrz:['1'],blj:'1'},
-                  {type:'2',sbmc:'堡垒机',ppxh:'',sl:'1',gmsf:'2',smzs:'1',ycyw:'1',sfrz:['1'],blj:'1'},
+                  {type:'2',sbmc:'SSL VPN',ppxh:'',sl:'1',gmsf:'2',smzs:'2',ycyw:'1',sfrz:['1'],blj:'1'},
+                  {type:'2',sbmc:'IPsec VPN',ppxh:'',sl:'1',gmsf:'2',smzs:'2',ycyw:'1',sfrz:['1'],blj:'1'},
+                  {type:'2',sbmc:'堡垒机',ppxh:'',sl:'1',gmsf:'2',smzs:'2',ycyw:'1',sfrz:['1'],blj:'1'},
                 ],     //sbhjs_zysb
                 sys_ywyy:[
                   {ywyy:'',gnms:'',fwfs:'1',bkfr:'1',jtqk1:'',dzqm:'1',jtqk2:''},
@@ -256,41 +256,76 @@ import axios from "axios"
                   remark:''
                 },{
                   id:15,
+                  name:'国密堡垒机',
+                  jbxh:' ',
+                  lb:'硬件',
+                  num:0,
+                  remark:'一主一备，可按需动态扩展'
+                },{
+                  id:16,
+                  name:'数字证书认证系统',
+                  jbxh:'SZT1913-2000',
+                  lb:'硬件',
+                  num:0,
+                  remark:''
+                },{
+                  id:17,
+                  name:'国密设备证书',
+                  jbxh:'HLJCA-Equipment-Cert',
+                  lb:'软件',
+                  num:0,
+                  remark:''
+                },{
+                  id:18,
+                  name:'国密SSL证书证书',
+                  jbxh:'GDCA-DV-STAR-SSL',
+                  lb:'软件',
+                  num:0,
+                  remark:''
+                },{
+                  id:19,
                   name:'云服务器密码机',
                   jbxh:'QuickHSM-VSM1000-VSM16',
                   lb:'硬件',
                   num:0,
                   remark:'一主一备，可按需动态扩展'
                 },{
-                  id:16,
+                  id:20,
                   name:'云服务器密码机',
                   jbxh:'QuickHSM-VSM1000-VSM32',
                   lb:'硬件',
                   num:0,
                   remark:'一主一备，可按需动态扩展'
                 },{
-                  id:17,
-                  name:'密码设备管理平台',
-                  jbxh:'QUICKCSP-DMS',
-                  lb:'软件',
-                  num:0,
-                  remark:''
-                },{
-                  id:18,
-                  name:'云租户授权（国密安全密码应用中间件）',
+                  id:21,
+                  name:'国密安全密码应用中间件（云版）',
                   jbxh:'QUICKCSP-C-B',
                   lb:'软件',
                   num:0,
-                  remark:''
+                  remark:'在有CSMP的情况下选用，具体数量根据实际租户来，若没有租户数量就直接写10个'
                 },{
-                  id:19,
+                  id:22,
                   name:'云安全管理平台（CSMP）',
                   jbxh:'QUICKCSP-CSMP',
                   lb:'软件',
                   num:0,
                   remark:''
                 },{
-                  id:20,
+                  id:23,
+                  name:'国密门禁系统',
+                  jbxh:' ',
+                  lb:'硬件',
+                  num:0,
+                  remark:''
+                },{
+                  id:24,
+                  name:'国密电子监控系统',
+                  jbxh:' ',
+                  lb:'硬件',
+                  num:0,
+                  remark:''
+                },{
+                  id:25,
                   name:'密码应用技术服务',
                   jbxh:' ',
                   lb:'服务',
