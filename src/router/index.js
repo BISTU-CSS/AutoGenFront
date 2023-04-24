@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import login from '../components/login'
 
 Vue.use(Router)
 
@@ -8,18 +9,19 @@ export default new Router({
     {
       path: '/middletable',
       name: 'Middletable',
+      meta: {
+        requireAuth: true
+      },
       component: () => import('@/components/middletable')
     },
-    // {
-    //   path: '/demo',
-    //   name: 'Demo',
-    //   component: () => import('@/components/demo')
-    // },
     {
       path: '/questionnaire',
       name: 'questionnaire',
+      meta: {
+        requireAuth: true
+      },
       component: () => import('@/components/questionnaire'),
-      beforeEnter: (to, from, next) => {  
+      beforeEnter: (to, from, next) => {
         next()
      }
       //http://localhost:8080/#/questionnaire/
@@ -27,12 +29,22 @@ export default new Router({
     {
       path: '/choose',
       name: 'choose',
+      meta: {
+        requireAuth: true
+      },
       component: () => import('@/components/choose')
     },{
       path: '/addque',
       name: 'addque',
+      meta: {
+        requireAuth: true
+      },
       component: () => import('@/components/addque')
+    },{
+      path: '/login',
+      name: 'login',
+      component: () => import('@/components/login')
     },
 
-  ]
+  ],
 })

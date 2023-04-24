@@ -33,7 +33,6 @@
             <el-input v-model="sys_unit" placeholder="请输入责任单位" style="width: 20%"></el-input>
           </el-form-item>
           <br>
-          <br>
           <el-form-item label="*确定所属行业">
             <el-radio-group v-model="sys_sshy">
               <el-radio label="1">公安</el-radio>
@@ -51,7 +50,6 @@
             </el-radio-group>
           </el-form-item>
           <br>
-          <br>
           <el-form-item label="*确定项目类型">
             <el-radio-group v-model="sys_xmlx">
               <el-radio label="1">单系统模式:建设的密码资源服务于单个信息系统</el-radio>
@@ -66,7 +64,20 @@
           <br>
           <br>
           <el-row>
-            <el-col span="5">
+            <el-col :span="5">
+              <el-form-item label="*系统架构">
+                <el-radio-group v-model="sys_xtjg">
+                  <el-radio label="1">C/S架构</el-radio>
+                  <br>
+                  <el-radio label="2">B/S架构</el-radio>
+                </el-radio-group>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <br>
+          <br>
+          <el-row>
+            <el-col :span="5">
               <el-form-item label="*系统建设">
                 <el-radio-group v-model="sys_xtjs">
                   <el-radio label="1">未建设</el-radio>
@@ -77,7 +88,7 @@
                 </el-radio-group>
               </el-form-item>
             </el-col>
-            <el-col span="5">
+            <el-col :span="5">
               <el-form-item label="*等保级别">
                 <el-radio-group v-model="sys_dbjb">
                   <el-radio label="1">二级</el-radio>
@@ -88,7 +99,7 @@
                 </el-radio-group>
               </el-form-item>
             </el-col>
-            <el-col span="5">
+            <el-col :span="5">
               <el-form-item label="*密评首次">
                 <el-radio-group v-model="sys_mpsc">
                   <el-radio label="1">首次</el-radio>
@@ -100,7 +111,7 @@
                 </el-radio-group>
               </el-form-item>
             </el-col>
-            <el-col span="5">
+            <el-col :span="5">
               <el-form-item label="*密码制度">
                 <el-radio-group v-model="sys_mmzd">
                   <el-radio label="1">未建设</el-radio>
@@ -113,7 +124,7 @@
           <br>
           <br>
           <el-row>
-            <el-col span="5">
+            <el-col :span="5">
               <el-form-item label="*云上部署">
                 <el-radio-group v-model="sys_ysbs" @change="changeRZYSbyYSBS">
                   <el-radio label="1">在云上</el-radio>
@@ -122,7 +133,7 @@
               </el-form-item>
             </el-col>
 
-            <el-col span="5">
+            <el-col :span="5">
               <el-form-item label="若在云上">
                 <el-radio-group v-model="sys_rzys" :disabled="sys_rzys_disableb">
                   <el-radio label="1">云平台已过密评</el-radio>
@@ -131,7 +142,7 @@
               </el-form-item>
             </el-col>
 
-            <el-col span="5">
+            <el-col :span="5">
               <el-form-item label="*服务端">
                 <el-radio-group v-model="mpjb_fwd">
                   <el-radio label="1">HTTPS</el-radio>
@@ -140,34 +151,44 @@
                 </el-radio-group>
               </el-form-item>
             </el-col>
-            <el-col span="5">
+            <el-col :span="5">
               <el-form-item label="*移动端">
                 <el-checkbox-group v-model="mpjb_ydd">
                   <el-checkbox label="1">无</el-checkbox>
-                  <br>
                   <el-checkbox label="2">手机APP</el-checkbox>
-                  <br>
                   <el-checkbox label="3">微信小程序</el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
             </el-col>
           </el-row>
-          <el-form-item label="定级预备编号">
-            <el-input v-model="sys_djbh" placeholder="请输入网络保护等级的定级预备编号" style="width: 20%"></el-input>
+          <el-form-item label="等保定级时间">
+            <el-input v-model="sys_dbsj" placeholder="请输入完成等保定级时间" style="width: 20%"></el-input>
           </el-form-item>
-          <br>
-          <el-form-item
-            v-for="(i, index) in dynamicYwyyForm.ywyy"
-            :label="'业务应用' + index"
-            :key="i.key"
-            :prop="'ywyy.' + index + '.value'"
-          >
-            <el-input v-model="i.value" style="width: 400px" @change="dynamicYwyyChange(index,i)"></el-input>
-            <el-button @click.prevent="removeDomain(i)">删除</el-button>
-          </el-form-item>
-          <el-form-item>
-            <el-button @click="addDomain">新增业务</el-button>
-          </el-form-item>
+            <el-form-item label="定级预备编号">
+              <el-input v-model="sys_djbh" placeholder="请输入网络保护等级的定级预备编号" style="width: 20%"></el-input>
+            </el-form-item>
+            <el-form-item label="测评机构">
+              <el-input v-model="sys_cpjg" placeholder="请输入等保测评机构" style="width: 20%"></el-input>
+            </el-form-item>
+              <el-form-item label="单位地址">
+                <el-input v-model="sys_dwdz" placeholder="请输入单位地址" style="width: 20%"></el-input>
+              </el-form-item>
+              <el-form-item label="上线时间">
+                <el-input v-model="sys_sxsj" placeholder="请输入系统上线时间" style="width: 20%"></el-input>
+              </el-form-item>
+              <br>
+              <el-form-item
+                v-for="(i, index) in dynamicYwyyForm.ywyy"
+                :label="'业务应用' + index"
+                :key="i.key"
+                :prop="'ywyy' + index + 'value'"
+              >
+                <el-input v-model="i.value" style="width: 400px" @change="dynamicYwyyChange(index,i)"></el-input>
+                <el-button @click.prevent="removeDomain(i)">删除</el-button>
+              </el-form-item>
+              <el-form-item>
+                <el-button @click="addDomain">新增业务</el-button>
+              </el-form-item>
         </el-form>
       </el-tab-pane>
       <el-tab-pane disabled label="调研简表" name="two">
@@ -522,7 +543,7 @@
               <el-table-column align="left" header-align="center" label="*所在网络(多选)" width="300px">
                 <template slot-scope="scope">
                   <el-checkbox-group v-model="scope.row.szwl">
-                    <el-col v-for="item in xtyhqk_szwl_options" :key="item.value" span="10">
+                    <el-col v-for="item in xtyhqk_szwl_options" :key="item.value" :span="10">
                       <div>
                         <el-checkbox :label="item.value">{{ item.label }}
                         </el-checkbox>
@@ -583,11 +604,11 @@
                 <template slot-scope="scope">
                   <el-radio-group v-model="scope.row.mj">
                     <el-row>
-                      <el-col span="8">
+                      <el-col :span="8">
                         <el-radio label="1">国密电子</el-radio>
                         <el-radio label="2">普通电子</el-radio>
                       </el-col>
-                      <el-col span="6">
+                      <el-col :span="6">
                         <el-radio label="3">非电子</el-radio>
                         <el-radio label="4">无</el-radio>
                       </el-col>
@@ -700,7 +721,7 @@
               <el-table-column align="left" header-align="center" label="*身份认证方式(多选)">
                 <template slot-scope="scope">
                   <el-checkbox-group v-model="scope.row.sfrz">
-                    <el-col span="25">
+                    <el-col :span="25">
                       <el-checkbox
                         v-for="item in wlhtx_sfrz_options"
                         :key="item.value"
@@ -798,13 +819,13 @@
               <el-table-column align="left" header-align="center" label="*数据库" width="250px">
                 <template slot-scope="scope">
                   <el-radio-group v-model="scope.row.sjk">
-                    <el-col span="12">
+                    <el-col :span="12">
                       <el-radio label="1">Oracle</el-radio>
                       <el-radio label="2">MySQL</el-radio>
                       <el-radio label="3">SQL Server</el-radio>
                       <el-radio label="7">无</el-radio>
                     </el-col>
-                    <el-col span="8">
+                    <el-col :span="8">
                       <el-radio label="4">MongoDB</el-radio>
                       <el-radio label="5">DB2</el-radio>
                       <el-radio label="6">PostgreSQL</el-radio>
@@ -825,15 +846,15 @@
                   </el-radio-group>
                 </template>
               </el-table-column>
-              <el-table-column align="left" header-align="center" label="*运维人身份认证(多选)" >
+              <el-table-column align="left" header-align="center" label="*运维人身份认证(多选)">
                 <template slot-scope="scope">
                   <el-checkbox-group v-model="scope.row.sfrz">
-                      <el-checkbox
-                        v-for="item in sbhjs_sfrz_options"
-                        :key="item.value"
-                        :label="item.value"
-                      >{{ item.label }}
-                      </el-checkbox>
+                    <el-checkbox
+                      v-for="item in sbhjs_sfrz_options"
+                      :key="item.value"
+                      :label="item.value"
+                    >{{ item.label }}
+                    </el-checkbox>
                   </el-checkbox-group>
                 </template>
               </el-table-column>
@@ -903,10 +924,10 @@
               <el-table-column align="left" header-align="center" label="*是否支持国密算法" width="120px">
                 <template slot-scope="scope">
                   <el-radio-group v-model="scope.row.gmsf">
-                    <el-col span="20">
+                    <el-col :span="20">
                       <el-radio label="1">是</el-radio>
                     </el-col>
-                    <el-col span="1">
+                    <el-col :span="1">
                       <el-radio label="2">否</el-radio>
                     </el-col>
                   </el-radio-group>
@@ -915,10 +936,10 @@
               <el-table-column align="left" header-align="center" label="*是否有商密证书" width="120px">
                 <template slot-scope="scope">
                   <el-radio-group v-model="scope.row.smzs">
-                    <el-col span="20">
+                    <el-col :span="20">
                       <el-radio label="1">是</el-radio>
                     </el-col>
-                    <el-col span="1">
+                    <el-col :span="1">
                       <el-radio label="2">否</el-radio>
                     </el-col>
                   </el-radio-group>
@@ -927,10 +948,10 @@
               <el-table-column align="left" header-align="center" label="*是否支持远程运维" width="120px">
                 <template slot-scope="scope">
                   <el-radio-group v-model="scope.row.ycyw">
-                    <el-col span="20">
+                    <el-col :span="20">
                       <el-radio label="1">是</el-radio>
                     </el-col>
-                    <el-col span="1">
+                    <el-col :span="1">
                       <el-radio label="2">否</el-radio>
                     </el-col>
                   </el-radio-group>
@@ -943,7 +964,7 @@
                       v-for="item in sbhjs_sfrz_options"
                       :key="item.value"
                       :label="item.value">
-                        {{ item.label }}
+                      {{ item.label }}
                     </el-checkbox>
                   </el-checkbox-group>
                 </template>
@@ -1117,14 +1138,14 @@
                   </el-select>
                 </template>
               </el-table-column>
-              <el-table-column align="center" label="数据内容" >
+              <el-table-column align="center" label="数据内容">
                 <template slot-scope="scope">
                   <el-input type="textarea" :rows="4"
                             placeholder='请输入内容'
                             v-model="scope.row.sjnr"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column align="center" label="保护需求" >
+              <el-table-column align="center" label="保护需求">
                 <template slot-scope="scope">
                   <el-input type="textarea" :rows="4" placeholder='请输入内容'
                             v-model="scope.row.bhxq"></el-input>
@@ -1246,6 +1267,7 @@ export default {
       sys_sshy: this.$route.params.data.sys_sshy,
       sys_sshy_qt: this.$route.params.data.sys_sshy_qt,
       sys_xmlx: this.$route.params.data.sys_xmlx,
+      sys_xtjg: this.$route.params.data.sys_xtjg,
       sys_name: this.$route.params.data.sys_name,
       sys_unit: this.$route.params.data.sys_unit,
       sys_xtjs: this.$route.params.data.sys_xtjs,
@@ -1255,6 +1277,10 @@ export default {
       sys_ysbs: this.$route.params.data.sys_ysbs,
       sys_rzys: this.$route.params.data.sys_rzys,
       sys_djbh: this.$route.params.data.sys_djbh,
+      sys_dwdz: this.$route.params.data.sys_dwdz,
+      sys_dbsj: this.$route.params.data.sys_dbsj,
+      sys_sxsj: this.$route.params.data.sys_sxsj,
+      sys_cpjg: this.$route.params.data.sys_cpjg,
       dynamicYwyyForm: this.$route.params.data.dynamicYwyyForm,
       sys_rzys_disableb: Boolean(this.$route.params.data.sys_ysbs - 1),
       //调研简表--系统
@@ -1490,12 +1516,17 @@ export default {
           sys_sshy: this.sys_sshy,
           sys_sshy_qt: this.sys_sshy_qt,
           sys_xmlx: this.sys_xmlx,
+          sys_xtjg: this.sys_xtjg,
           sys_xtjs: this.sys_xtjs,
           sys_dbjb: this.sys_dbjb,
           sys_mpsc: this.sys_mpsc,
           sys_mmzd: this.sys_mmzd,
           sys_ysbs: this.sys_ysbs,
           sys_djbh: this.sys_djbh,
+          sys_dwdz: this.sys_dwdz,
+          sys_sxsj: this.sys_sxsj,
+          sys_dbsj: this.sys_dbsj,
+          sys_cpjg: this.sys_cpjg,
           sys_rzys: this.sys_rzys_disableb ? 3 : this.sys_rzys,
           mpjb_fwd: this.mpjb_fwd,
           mpjb_ydd: this.mpjb_ydd,
@@ -1533,7 +1564,10 @@ export default {
           sbqd: this.sbqd
         }
       }, {
-        responseType: 'blob'
+        responseType: 'blob',
+        headers:{
+          'token': window.sessionStorage['token']
+        }
       }).then(function (response) {
         that.loading = false
         var aTag = document.createElement('a')
@@ -1543,7 +1577,7 @@ export default {
         aTag.click()
       }).catch(function (error) {
         that.loading = false
-        alert(error)
+        alert("lksadjf")
       })
     },
     dynamicYwyyChange (index, value) {
@@ -1612,7 +1646,7 @@ export default {
         ppxh: '',
         sl: '1',
         gmsf: '2',
-        smzs: '1',
+        smzs: '2',
         ycyw: '1',
         sfrz: ['1'],
         blj: '1',
@@ -1698,12 +1732,17 @@ export default {
           sys_sshy: this.sys_sshy,
           sys_sshy_qt: this.sys_sshy_qt,
           sys_xmlx: this.sys_xmlx,
+          sys_xtjg: this.sys_xtjg,
           sys_xtjs: this.sys_xtjs,
           sys_dbjb: this.sys_dbjb,
           sys_mpsc: this.sys_mpsc,
           sys_mmzd: this.sys_mmzd,
           sys_ysbs: this.sys_ysbs,
           sys_djbh: this.sys_djbh,
+          sys_dwdz: this.sys_dwdz,
+          sys_sxsj: this.sys_sxsj,
+          sys_dbsj: this.sys_dbsj,
+          sys_cpjg: this.sys_cpjg,
           sys_rzys: this.sys_rzys_disableb ? 3 : this.sys_rzys,
           mpjb_fwd: this.mpjb_fwd,
           mpjb_ydd: this.mpjb_ydd,
@@ -1740,6 +1779,10 @@ export default {
           sys_ywyy: this.yyhsj_ywyy_zysj,
           sys_zysj: this.yyhsj_ywyy_zysjqk,
           sbqd: this.sbqd
+        },
+      },{
+        headers:{
+          'token': window.sessionStorage['token']
         }
       }).then(function (response) {
         that.loading = false
@@ -1767,6 +1810,7 @@ export default {
           sys_sshy: this.sys_sshy,
           sys_sshy_qt: this.sys_sshy_qt,
           sys_xmlx: this.sys_xmlx,
+          sys_xtjg: this.sys_xtjg,
           sys_xtjs: this.sys_xtjs,
           sys_dbjb: this.sys_dbjb,
           sys_mpsc: this.sys_mpsc,
@@ -1811,7 +1855,10 @@ export default {
           sbqd: this.sbqd
         }
       }, {
-        responseType: 'blob'
+        responseType: 'blob',
+        headers:{
+          'token': window.sessionStorage['token']
+        }
       }).then(function (response) {
         that.loading = false
         var aTag = document.createElement('a')
@@ -1821,7 +1868,7 @@ export default {
         aTag.click()
       }).catch(function (error) {
         that.loading = false
-        alert(error)
+        alert("lksadjf")
       })
     },
     changeRZYSbyYSBS (index) {
