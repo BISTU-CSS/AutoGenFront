@@ -1,11 +1,12 @@
 import axios from 'axios'
 import store from '@/store'
 
-// const baseURL="localhost:8088/api"
+
 
 //创建axios实例
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // api的base_url
+  // baseURL: process.env.VUE_APP_BASE_API, // 本地测试用
+  baseURL: "http://localhost:8084/api", // 远程部署用
 })
 
 // request 请求拦截
@@ -28,9 +29,12 @@ service.interceptors.request.use(
 axios.interceptors.response.use(response => {
     let res = response.data;
     console.log(res)
-    if (res.retcode === 'ok') {
+    if (res.retcode === 'ok' ||res.retcode === 'error') {
       return response
-    } else if (response.headers.get('Content-Disposition') === 'attachment; filename="example.docx"'){
+      //本地测试用example.docx  远程部署用complete_example.docx
+      //未来不使用get('Content-Disposition')，通过其它方式拦截返回的文件流
+    // } else if (response.headers.get('Content-Disposition') === 'attachment; filename="example.docx"'){
+    } else if (response.headers.get('Content-Disposition') === 'attachment; filename="complete_example.docx"'){
       return response
     }else if (response.headers.get('Content-Disposition') === 'attachment; filename="sbqd.xlsx"'){
       return response

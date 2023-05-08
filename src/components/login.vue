@@ -2,7 +2,9 @@
   <body id="login-page">
   <el-form class="login-container" label-position="left" label-width="0px">
     <h3 class="login_title">系统登录</h3>
+    用户名：test 密码：111111
     <el-form-item>
+      <br>
       <el-input
         type="text"
         v-model="loginForm.loginName"
@@ -52,7 +54,6 @@ export default {
         loginName: this.loginForm.loginName,
         password: this.loginForm.password,
       }).then((resp) => {
-        alert(resp.data.retcode)
         let code = resp.data.retcode
         if (code === 'ok') {
           let data = resp.data.data
