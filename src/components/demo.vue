@@ -55,8 +55,8 @@
                             安全接入认证<br>
                             <el-cascader v-model="wlhtx_aqjr_form" :options="wlhtx_aqjr_options" style="width: 90%;">
                             </el-cascader>
-                        </el-form-item>  
-                    </el-form>  
+                        </el-form-item>
+                    </el-form>
                 </el-tab-pane> -->
                 <el-tab-pane label="设备和计算" name="third">
                     <el-form ref="form" :model="form" label-width="80px">
@@ -69,7 +69,7 @@
                             远程管理通道安全<br>
                             <el-cascader v-model="sbhjs_ycgl_form" :options="sbhjs_ycgl_options" style="width: 90%;">
                             </el-cascader>
-                        </el-form-item>    
+                        </el-form-item>
                         <el-form-item label="问题3">
                             系统资源访问控制信息完整性<br>
                             <el-cascader v-model="sbhjs_xtzy_form" :options="sbhjs_xtzy_options" style="width: 90%;">
@@ -134,7 +134,7 @@
                             <el-cascader v-model="yyhsj_bkfr_form" :options="yyhsj_bkfr_options" style="width: 90%;">
                             </el-cascader>
                         </el-form-item>
-                    </el-form>  
+                    </el-form>
                 </el-tab-pane>
                 <el-tab-pane label="特殊" name="five">
                     <el-form ref="form" :model="form" label-width="80px">
@@ -321,7 +321,7 @@ export default {
 
             axios.post('/api/download',{
                 "data":data,
-            },{                
+            },{
                 responseType:'blob'
             }
             ).then(function(response){
