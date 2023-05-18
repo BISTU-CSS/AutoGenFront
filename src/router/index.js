@@ -19,7 +19,7 @@ export default new Router({
       path: '/questionnaire',
       name: 'questionnaire',
       component: () => import('@/components/questionnaire'),
-      beforeEnter: (to, from, next) => {  
+      beforeEnter: (to, from, next) => {
         next()
      }
       //http://localhost:8080/#/questionnaire/
@@ -32,7 +32,11 @@ export default new Router({
       path: '/addque',
       name: 'addque',
       component: () => import('@/components/addque')
-    },
+    },{
+      path: '/usermanagement',
+      name: 'usermanagement',
+      component: () => import('@/components/usermanagement')
+    }
 
   ]
 })

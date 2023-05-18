@@ -41,7 +41,7 @@
   </div>
 </div>
 
-  
+
 </template>
 
 <script>
@@ -305,6 +305,7 @@ import axios from "axios"
               // alert(jsonData)
               that.tableData = response.data.data
           }else{
+            console.log(response.data)
             alert("系统错误，请联系管理员")
           }
         }).catch(function(error){
