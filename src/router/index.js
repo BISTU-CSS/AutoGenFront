@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import login from '../components/login'
 
 Vue.use(Router)
 
@@ -8,16 +9,17 @@ export default new Router({
     {
       path: '/middletable',
       name: 'Middletable',
+      meta: {
+        requireAuth: true
+      },
       component: () => import('@/components/middletable')
     },
-    // {
-    //   path: '/demo',
-    //   name: 'Demo',
-    //   component: () => import('@/components/demo')
-    // },
     {
       path: '/questionnaire',
       name: 'questionnaire',
+      meta: {
+        requireAuth: true
+      },
       component: () => import('@/components/questionnaire'),
       beforeEnter: (to, from, next) => {
         next()
@@ -27,16 +29,25 @@ export default new Router({
     {
       path: '/choose',
       name: 'choose',
+      meta: {
+        requireAuth: true
+      },
       component: () => import('@/components/choose')
     },{
       path: '/addque',
       name: 'addque',
+      meta: {
+        requireAuth: true
+      },
       component: () => import('@/components/addque')
     },{
       path: '/usermanagement',
       name: 'usermanagement',
       component: () => import('@/components/usermanagement')
-    }
-
-  ]
+    },{
+      path: '/login',
+      name: 'login',
+      component: () => import('@/components/login')
+    },
+  ],
 })
