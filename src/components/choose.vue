@@ -1,41 +1,88 @@
 <template>
-  <div>
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal"
-             @select="handleSelect" background-color="#545c64" text-color="#fff"
-             active-text-color="#ffd04b">
-      <el-menu-item index="1">新增项目</el-menu-item>
-      <el-menu-item index="2">调研表选择</el-menu-item>
-      <el-menu-item index="3" disabled>当前调研表</el-menu-item>
-      <el-menu-item index="4" disabled>中间配置</el-menu-item>
-      <el-menu-item index="5" disabled>规则配置</el-menu-item>
-    </el-menu>
-    <div class="mkdw">
-      <el-table :data="tableData" tooltip-effect="dark" style="width: 100%">
-        <el-table-column label="项目名称" width="260">
-          <template slot-scope="scope">{{ scope.row.xmmc }}</template>
-        </el-table-column>
-        <el-table-column prop="cjr" label="创建人" width="100">
-        </el-table-column>
-        <el-table-column prop="zdls" label="指导老师" width="100">
-        </el-table-column>
-        <el-table-column prop="xmsm" label="项目说明" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="date" label="创建时间" width="180">
-        </el-table-column>
-        <el-table-column prop="xgsj" label="修改时间" width="180">
-        </el-table-column>
-        <el-table-column prop="score" label="预估分数" width="180">
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="160">
-          <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="primary" size="small">进入</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+  <div style="background: #eeeeee;" >
+    <div>
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal"
+               @select="handleSelect" background-color="#141016" text-color="#fff"
+               active-text-color="#ffd04b" margin="0" padding="0">
+        <el-col :span="21">
+          <el-menu-item index="1">项目主页</el-menu-item>
+        </el-col>
+        <el-col :span="3">
+          <el-menu-item index="2" disabled v-text="yonghu"></el-menu-item>
+        </el-col>
+      </el-menu>
     </div>
+    <el-row class="tac">
+      <el-col :span="3">
+        <el-menu
+          default-active="2"
+          class="el-menu-vertical-demo"
+          @select="handleSelectFileType"
+          background-color="#222d33"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+          style="margin-right:20px;">
+          <br>
+          <el-menu-item index="1" align="center">
+            <el-button type="success"
+                       round style="width: 100%;"
+                       @click="addque"
+            >新增项目</el-button>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <span slot="title">所有项目</span>
+          </el-menu-item>
+          <el-menu-item index="3">
+            <span slot="title">您的项目</span>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <span slot="title">已归档项目</span>
+          </el-menu-item>
+          <el-menu-item index="5">
+            <span slot="title">已删除项目</span>
+          </el-menu-item>
+        </el-menu>
+      </el-col>
+      <el-col :span="20">
+        <div>
+          <h2 v-text="daohanglan"></h2>
+        </div>
+
+        <div>
+          <el-input placeholder="搜索项目名称"
+                    style="width:700px;margin-left:20px;
+                          margin-top:10px;margin-bottom:10px;">
+            <template #append>
+              <el-button icon="el-icon-search"></el-button>
+            </template>
+          </el-input>
+        </div>
+
+        <div class="mkdw">
+          <el-table :data="tableData" tooltip-effect="dark" style="width: 100%">
+            <el-table-column label="项目名称" width="260">
+              <template slot-scope="scope">{{ scope.row.xmmc }}</template>
+            </el-table-column>
+            <el-table-column prop="cjr" label="创建人" width="100">
+            </el-table-column>
+            <el-table-column prop="zdls" label="指导老师" width="100">
+            </el-table-column>
+            <el-table-column prop="date" label="创建时间" width="180">
+            </el-table-column>
+            <el-table-column prop="xgsj" label="修改时间" width="180">
+            </el-table-column>
+            <el-table-column prop="" label="项目类型" width="200">
+            </el-table-column>
+            <el-table-column fixed="right" label="操作" width="160">
+              <template slot-scope="scope">
+                <el-button @click="handleClick(scope.row)" type="primary" size="small">进入</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-col>
+    </el-row>
   </div>
-
-
 </template>
 
 <script>
@@ -45,12 +92,15 @@ import router from '../router'
 export default {
   data () {
     return {
+      yonghu:"用户A",
+      daohanglan:"所有项目",
       activeIndex: '2',
       tableData: [],
       multipleSelection: []
     }
   },
   methods: {
+
     handleClick (row) {
       let that = this
       axios.post('/api/getQuestionnaireResult', {
@@ -380,11 +430,28 @@ export default {
     },
     handleSelect (key, keyPath) {
       if (key == 1) {
-        this.$router.push({path: '/addque'})
-      } else if (key == 2) {
         this.$router.push({path: '/choose'})
+      } else if (key == 2) {
+
       }
+    },
+    addque(){
+      this.$router.push({path: '/addque'})    //换成弹窗
+    },
+    handleSelectFileType(key, keyPath){
+      if (key == 1) {   //新增项目
+      } else if (key == 2) {
+        this.daohanglan = "所有项目"
+      } else if (key == 3) {
+        this.daohanglan ="您的项目"
+      } else if (key == 4) {
+        this.daohanglan = "已归档项目"
+      } else if (key == 5) {
+        this.daohanglan = "已删除项目"
+      }
+
     }
+
   },
   mounted: function () {
     let that = this
@@ -413,3 +480,19 @@ export default {
   },
 }
 </script>
+
+<style>
+  .el-menu{
+    border: 0!important;
+  }
+
+  body{
+    margin: 0px;
+  }
+  .el-menu-vertical-demo{
+    height: 150vh;
+    border-right: none;
+    overflow-y: auto;
+  }
+
+</style>

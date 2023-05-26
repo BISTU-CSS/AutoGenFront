@@ -12,8 +12,6 @@
       <el-menu-item index="1">新增项目</el-menu-item>
       <el-menu-item index="2">调研表选择</el-menu-item>
       <el-menu-item index="3">当前调研表</el-menu-item>
-      <el-menu-item index="4" disabled>中间配置</el-menu-item>
-      <el-menu-item index="5" disabled>规则配置</el-menu-item>
     </el-menu>
     <el-form :model="Form" label-width="0px" label-position="left">
       <el-form-item>

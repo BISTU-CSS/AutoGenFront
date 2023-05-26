@@ -1,20 +1,5 @@
 <template>
   <div>
-    <el-menu
-      :default-active="activeIndex"
-      class="el-menu-demo"
-      mode="horizontal"
-      @select="handleSelect"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b">
-      <el-menu-item index="1">新增项目</el-menu-item>
-      <el-menu-item index="2">调研表选择</el-menu-item>
-      <el-menu-item index="3" disabled>当前调研表</el-menu-item>
-      <el-menu-item index="4" disabled>中间配置</el-menu-item>
-      <el-menu-item index="5" disabled>规则配置</el-menu-item>
-    </el-menu>
-    <br><br><br>
     <div v-loading="loading">
       <el-form ref="form" :model="Form" label-width="100px">
         <el-form-item label="项目名称">
