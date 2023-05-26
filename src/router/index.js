@@ -7,14 +7,6 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/middletable',
-      name: 'Middletable',
-      meta: {
-        requireAuth: true
-      },
-      component: () => import('@/components/middletable')
-    },
-    {
       path: '/questionnaire',
       name: 'questionnaire',
       meta: {

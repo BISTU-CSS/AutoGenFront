@@ -9,14 +9,6 @@
       <el-menu-item index="4" disabled>中间配置</el-menu-item>
       <el-menu-item index="5" disabled>规则配置</el-menu-item>
     </el-menu>
-    <div>
-      <br>
-      <el-alert title="请谨慎操作" type="warning"
-                description="目前并未对用户身份进行限制，故可以操作其他人的全部调研表，请勿随意编辑或删除"
-                show-icon>
-      </el-alert>
-      <br>
-    </div>
     <div class="mkdw">
       <el-table :data="tableData" tooltip-effect="dark" style="width: 100%">
         <el-table-column label="项目名称" width="260">
