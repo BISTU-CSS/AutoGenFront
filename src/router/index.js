@@ -1,25 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import login from '../components/login'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/middletable',
-      name: 'Middletable',
-      component: () => import('@/components/middletable')
-    },
-    // {
-    //   path: '/demo',
-    //   name: 'Demo',
-    //   component: () => import('@/components/demo')
-    // },
-    {
       path: '/questionnaire',
       name: 'questionnaire',
+      meta: {
+        requireAuth: true
+      },
       component: () => import('@/components/questionnaire'),
-      beforeEnter: (to, from, next) => {  
+      beforeEnter: (to, from, next) => {
         next()
      }
       //http://localhost:8080/#/questionnaire/
@@ -27,12 +21,30 @@ export default new Router({
     {
       path: '/choose',
       name: 'choose',
+      meta: {
+        requireAuth: true
+      },
       component: () => import('@/components/choose')
     },{
-      path: '/addque',
-      name: 'addque',
-      component: () => import('@/components/addque')
+      path: '/basicinfo',
+      name: 'basicinfo',
+      meta: {
+        requireAuth: true
+      },
+      component: () => import('@/components/basicinfo')
+    },{
+      path: '/login',
+      name: 'login',
+      component: () => import('@/components/login')
+    },{
+      path: '/upload',
+      name: 'upload',
+      component: () => import('@/components/fileUpload')
+    },{
+      path: '/pingfen',
+      name: 'pingfen',
+      component: () => import('@/components/pingfen')
     },
 
-  ]
+  ],
 })
