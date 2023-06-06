@@ -44,7 +44,11 @@ export default new Router({
       path: '/pingfen',
       name: 'pingfen',
       component: () => import('@/components/pingfen')
-    },
+    },{
+      path: '/usermanagement',
+      name: 'usermanagement',
+      component: () => import('@/components/usermanagement')
+    }
 
   ],
 })
