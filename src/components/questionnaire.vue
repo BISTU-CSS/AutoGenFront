@@ -6,13 +6,16 @@
       class="el-menu-demo"
       mode="horizontal"
       @select="handleSelect"
-      background-color="#545c64"
+      background-color="#141016"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-menu-item index="1">新增项目</el-menu-item>
-      <el-menu-item index="2">调研表选择</el-menu-item>
+      <el-menu-item index="1" > <i class="el-icon-back" style="font-size: 20px; cursor: pointer;"></i>返回主页</el-menu-item>
+      <el-menu-item index="2" :disabled=true>项目基本信息</el-menu-item>
       <el-menu-item index="3">当前调研表</el-menu-item>
+      <el-menu-item index="4">文件管理</el-menu-item>
+      <el-menu-item index="5">评分系统</el-menu-item>
     </el-menu>
+
     <el-form :model="Form" label-width="0px" label-position="left">
       <el-form-item>
         系统名称&nbsp;&nbsp;
@@ -1341,11 +1344,8 @@ export default {
     handleSelect (key, keyPath) {
       if (key == 1) {
         //检查是否保存
-        this.$router.push({path: '/addque'})
-      } else if (key == 2) {
-        //检查是否保存
         let that = this
-        this.$confirm('您正在离开此界面，是否需要保存？', '提示', {
+        this.$confirm('您正在离开此界面，是否需要保存？（点击右上角关闭为直接离开）', '提示', {
           confirmButtonText: '帮我保存',
           cancelButtonText: '直接离开',
           type: 'warning'
@@ -1356,8 +1356,50 @@ export default {
         }).catch(() => {
           that.$router.push({path: '/choose'})
         })
+      } else if (key == 2) {
+        //无
       } else if (key == 3) {
-
+        //当前页面，不做反应
+      } else if (key == 4) {
+        let that = this
+        this.$confirm('您正在离开此界面，是否需要保存？（点击右上角关闭为直接离开）', '提示', {
+          confirmButtonText: '帮我保存',
+          cancelButtonText: '直接离开',
+          type: 'warning'
+        }).then(() => {
+          that.saveChoose()
+          that.$router.push({
+            name: 'upload', params: {
+              xmmc: this.sys_name,
+            }
+          })
+        }).catch(() => {
+          that.$router.push({
+            name: 'upload', params: {
+              xmmc: this.sys_name,
+            }
+          })
+        })
+      } else if (key == 5) {      //跳转到评分系统
+        let that = this
+        this.$confirm('您正在离开此界面，是否需要保存？（点击右上角关闭为直接离开）', '提示', {
+          confirmButtonText: '帮我保存',
+          cancelButtonText: '直接离开',
+          type: 'warning'
+        }).then(() => {
+          that.saveChoose()
+          that.$router.push({
+            name: 'pingfen', params: {
+              xmmc: this.sys_name,
+            }
+          })
+        }).catch(() => {
+          that.$router.push({
+            name: 'pingfen', params: {
+              xmmc: this.sys_name,
+            }
+          })
+        })
       }
     },
     xtyhqkDelete (index) {
@@ -1509,6 +1551,14 @@ export default {
         // alert('通信错误，请联系管理员')
         // console.error(error)
       })
+    }
+  },
+  mounted: function () {
+    let that = this
+    if(this.sys_name == null) {      //如果是随便进来的，直接跳出去
+      alert("正在返回最前端")
+      this.$router.push({path: '/choose'})
+      return
     }
   }
 }

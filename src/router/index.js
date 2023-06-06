@@ -26,16 +26,24 @@ export default new Router({
       },
       component: () => import('@/components/choose')
     },{
-      path: '/addque',
-      name: 'addque',
+      path: '/basicinfo',
+      name: 'basicinfo',
       meta: {
         requireAuth: true
       },
-      component: () => import('@/components/addque')
+      component: () => import('@/components/basicinfo')
     },{
       path: '/login',
       name: 'login',
       component: () => import('@/components/login')
+    },{
+      path: '/upload',
+      name: 'upload',
+      component: () => import('@/components/fileUpload')
+    },{
+      path: '/pingfen',
+      name: 'pingfen',
+      component: () => import('@/components/pingfen')
     },
 
   ],
