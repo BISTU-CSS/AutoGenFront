@@ -44,10 +44,14 @@ export default new Router({
       path: '/usermanagement',
       name: 'usermanagement',
       component: () => import('@/components/usermanagement')
-    },{
+    }, {
+      path: '/statistics',
+      name: 'statistics',
+      component: () => import('@/components/statistics')
+    }, {
       path: '/login',
       name: 'login',
       component: () => import('@/components/login')
-    },
+    }
   ],
 })

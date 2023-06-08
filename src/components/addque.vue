@@ -96,7 +96,6 @@ export default {
         this.$router.push({path: '/choose'})
       }
     }
-
   }
 }
 </script>
