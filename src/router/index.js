@@ -7,14 +7,6 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/middletable',
-      name: 'Middletable',
-      meta: {
-        requireAuth: true
-      },
-      component: () => import('@/components/middletable')
-    },
-    {
       path: '/questionnaire',
       name: 'questionnaire',
       meta: {
@@ -33,13 +25,17 @@ export default new Router({
         requireAuth: true
       },
       component: () => import('@/components/choose')
+    }, {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/components/login')
     },{
-      path: '/addque',
-      name: 'addque',
+      path: '/basicinfo',
+      name: 'basicinfo',
       meta: {
         requireAuth: true
       },
-      component: () => import('@/components/addque')
+      component: () => import('@/components/basicinfo')
     },{
       path: '/usermanagement',
       name: 'usermanagement',
@@ -48,10 +44,14 @@ export default new Router({
       path: '/statistics',
       name: 'statistics',
       component: () => import('@/components/statistics')
-    }, {
-      path: '/login',
-      name: 'login',
-      component: () => import('@/components/login')
+    },{
+      path: '/upload',
+      name: 'upload',
+      component: () => import('@/components/fileUpload')
+    },{
+      path: '/pingfen',
+      name: 'pingfen',
+      component: () => import('@/components/pingfen')
     }
-  ],
+  ]
 })

@@ -1,49 +1,107 @@
 <template>
-  <div>
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal"
-             @select="handleSelect" background-color="#545c64" text-color="#fff"
-             active-text-color="#ffd04b">
-      <el-menu-item index="1">新增项目</el-menu-item>
-      <el-menu-item index="2">调研表选择</el-menu-item>
-      <el-menu-item index="3" disabled>当前调研表</el-menu-item>
-      <el-menu-item index="4" disabled>中间配置</el-menu-item>
-      <el-menu-item index="5" disabled>规则配置</el-menu-item>
-    </el-menu>
+  <div style="background: #eeeeee;" >
     <div>
-      <br>
-      <el-alert title="请谨慎操作" type="warning"
-                description="目前并未对用户身份进行限制，故可以操作其他人的全部调研表，请勿随意编辑或删除"
-                show-icon>
-      </el-alert>
-      <br>
+      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal"
+               background-color="#141016" text-color="#fff"
+               active-text-color="#ffd04b" margin="0" padding="0">
+        <el-col :span="21">
+          <el-menu-item index="1">项目主页</el-menu-item>
+        </el-col>
+        <el-col :span="3">
+          <el-menu-item index="2" disabled v-text="yonghu"></el-menu-item>
+        </el-col>
+      </el-menu>
     </div>
-    <div class="mkdw">
-      <el-table :data="tableData" tooltip-effect="dark" style="width: 100%">
-        <el-table-column label="项目名称" width="260">
-          <template slot-scope="scope">{{ scope.row.xmmc }}</template>
-        </el-table-column>
-        <el-table-column prop="cjr" label="创建人" width="100">
-        </el-table-column>
-        <el-table-column prop="zdls" label="指导老师" width="100">
-        </el-table-column>
-        <el-table-column prop="xmsm" label="项目说明" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="date" label="创建时间" width="180">
-        </el-table-column>
-        <el-table-column prop="xgsj" label="修改时间" width="180">
-        </el-table-column>
-        <el-table-column prop="score" label="预估分数" width="180">
-        </el-table-column>
-        <el-table-column fixed="right" label="操作" width="160">
-          <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="primary" size="small">进入</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </div>
+    <el-row class="tac">
+      <el-col :span="3">
+        <el-menu
+          default-active="2"
+          class="el-menu-vertical-demo"
+          @select="handleSelectFileType"
+          background-color="#222d33"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+          style="margin-right:20px;">
+          <br>
+          <el-menu-item index="1" align="center">
+            <el-button type="success"
+                       round style="width: 100%;"
+                       @click="addque"
+            >新增项目</el-button>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <span slot="title">所有项目</span>
+          </el-menu-item>
+          <el-menu-item index="3">
+            <span slot="title">您的项目</span>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <span slot="title">已归档项目</span>
+          </el-menu-item>
+          <el-menu-item index="5">
+            <span slot="title">已删除项目</span>
+          </el-menu-item>
+        </el-menu>
+      </el-col>
+      <el-col :span="20">
+        <div><br>
+          <el-alert
+            title="目前所有项目均可删除与操作"
+            type="warning"
+            description="请谨慎操作项目"
+            show-icon>
+          </el-alert>
+        </div>
+        <div>
+          <h2 v-text="daohanglan"></h2>
+        </div>
+        <div>
+          <el-input placeholder="搜索项目名称"
+                    style="width:700px;margin-left:20px;
+                          margin-top:10px;margin-bottom:10px;">
+            <template #append>
+              <el-button icon="el-icon-search"></el-button>
+            </template>
+          </el-input>
+        </div>
+        <div class="mkdw">
+          <el-table :data="tableData" tooltip-effect="dark" style="width: 100%">
+            <el-table-column label="项目名称" width="">
+              <template slot-scope="scope">
+                <el-link style="color: #004eb8;" @click="handleClick(scope.row)"  type="primary">{{ scope.row.xmmc }}</el-link>
+              </template>
+            </el-table-column>
+            <el-table-column prop="cjr" label="创建人" width="100">
+            </el-table-column>
+            <el-table-column prop="zdls" label="指导老师" width="100">
+            </el-table-column>
+            <el-table-column prop="date" label="创建时间" width="180">
+            </el-table-column>
+            <el-table-column prop="xgsj" label="上次修改时间" width="180">
+            </el-table-column>
+            <el-table-column prop="" label="项目标签" width="100">
+            </el-table-column>
+            <el-table-column fixed="right" label="操作" align="center" width="160">
+              <template slot-scope="scope">
+                <el-tooltip class="item" effect="dark" content="打包下载" placement="top">
+                  <i class="el-icon-download" style="font-size: 20px; cursor: pointer;"></i>
+                </el-tooltip>&nbsp;
+                <el-tooltip class="item" effect="dark" content="添加标签" placement="top">
+                  <i class="el-icon-collection-tag" style="font-size: 20px; cursor: pointer;"></i>
+                </el-tooltip>&nbsp;
+                <el-tooltip class="item" effect="dark" content="归档/移除归档" placement="top">
+                  <i class="el-icon-receiving" style="font-size: 20px; cursor: pointer;"></i>
+                </el-tooltip>&nbsp;
+                <el-tooltip class="item" effect="dark" content="删除" placement="top">
+                  <i class="el-icon-delete" style="font-size: 20px; cursor: pointer;"></i>
+                </el-tooltip>&nbsp;
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-col>
+    </el-row>
   </div>
-
-
 </template>
 
 <script>
@@ -52,7 +110,9 @@ import router from '../router'
 export default {
   data () {
     return {
-      activeIndex: '2',
+      yonghu:"用户A",
+      daohanglan:"所有项目",
+      activeIndex: '1',
       tableData: [],
       multipleSelection: []
     }
@@ -60,338 +120,73 @@ export default {
   methods: {
     handleClick (row) {
       let that = this
-      axios.post('/api/getQuestionnaireResult', {
-          xmmc: row.xmmc,
-          cjr: row.cjr,
-          zdls: row.zdls,
-          xmsm: row.xmsm,
-        }, {
-          headers: {
-            'token': window.sessionStorage['token']
-          }
+      that.$router.push({
+        name: 'basicinfo', params: {
+          storage_name: row.xmmc,
+          cjr : row.cjr
         }
-      ).then(function (response) {
-        if (response.data.retcode == 'error') {
-          let data_tmp = {
-            sys_name: row.xmmc,
-            sys_sshy: '0',
-            sys_sshy_qt: '',
-            sys_xmlx: '',
-            sys_xtjg: '2',
-            sys_unit: '',
-            sys_xtjs: '1',
-            sys_dbjb: '2',
-            sys_mpsc: '1',
-            sys_mmzd: '1',
-            sys_ysbs: '',
-            sys_rzys: '0',
-            sys_djbh: '',
-            sys_dwdz: '',
-            sys_sxsj: '',
-            sys_dbsj: '',
-            sys_cpjg: '',
-            dynamicYwyyForm: {
-              ywyy: [{
-                key: '',
-                value: ''
-              }]
-            },
-            mpjb_fwd: '1',
-            mpjb_ydd: ['1'],
-            mpjb_xy_sfmz: '1',
-            mpjb_sfrz: [],
-            mpjb_wlhhj_sfmz: '1',
-            mpjb_fwfs: [],
-            mpjb_yjzd: '0',
-            mpjb_wlhtx_sfmz: '1',
-            mpjb_sjk: '0',
-            mpjb_sjk_qt: '',
-            mpjb_sslvpn: '0',
-            mpjb_sslvpn_ppxh: '',
-            mpjb_ipsecvpn: '0',
-            mpjb_ipsecvpn_ppxh: '',
-            mpjb_blj: '0',
-            mpjb_blj_ppxh: '',
-            mpjb_sbhjs_sjk_sfmz: '1',
-            mpjb_sbhjs_vpn_sfmz: '1',
-            mpjb_bkfr: '0',
-            mpjb_dzqz: '0',
-            mpjb_cssjl: '',
-            mpjb_ccsjl: '',
-            mpjb_yyhsj_bkfrxydzqz_sfmz: '1',
-            mpjb_yyhsj_cssjlyccsjl_sfmz: '1',
-            sys_xtyh: [
-              {ywyy: '', yh: '1', dlfs: ['1'], sfrz: ['2'], szwl: ['1', '4'], sl: 1,},
-              {ywyy: '', yh: '2', dlfs: ['1'], sfrz: ['2'], szwl: ['4'], sl: 1,},
-              {ywyy: '', yh: '3', dlfs: ['1'], sfrz: ['2'], szwl: ['4'], sl: 1,},
-              {ywyy: '', yh: '4', dlfs: ['4'], sfrz: ['2'], szwl: ['1'], sl: 1,},
-            ],     //xtyhqk
-            sys_wlhhj: [{
-              jfmc: '',
-              jflx: '2',
-              mj: '2',
-              sfrz: ['2'],
-              spjk: '2',
-              zjsb: '1'
-            }],    //wlhhj
-            sys_wlhtx: [
-              {type: '1', txzt: '1', sfrz: ['2'], zysj: '1', sl: '', sm: '', cpdx: '互联网VPN客户端与运维SSL VPN之间的运维通信信道'},
-              {type: '1', txzt: '2', sfrz: ['2'], zysj: '1', sl: '', sm: '', cpdx: '互联网PC浏览器与系统之间的通信信道'},
-              {type: '1', txzt: '3', sfrz: ['2'], zysj: '1', sl: '', sm: '', cpdx: '互联网PC客户端与系统之间的通信信道'},
-              {type: '1', txzt: '4', sfrz: ['2'], zysj: '1', sl: '', sm: '', cpdx: '互联网移动端APP与系统之间的通信信道'},
-              {type: '1', txzt: '5', sfrz: ['2'], zysj: '1', sl: '', sm: '', cpdx: '互联网移动端微信小程序与系统之间的通信信道'},
-              {type: '2', txzt: '2', sfrz: ['2'], zysj: '1', sl: '', sm: '', cpdx: '办公内网PC浏览器与系统之间的通信信道'},
-              {type: '2', txzt: '3', sfrz: ['2'], zysj: '1', sl: '', sm: '', cpdx: '办公内网PC客户端与系统之间的通信信道'},
-            ],    //wlhtx
-            sys_fwq: [
-              {sbmc: '业务服务器', czxt: '1', sjk: '2', sl: '1', ppxh: '', ycyw: '1', sfrz: ['1'], blj: '1',},
-              {sbmc: '数据库服务器', czxt: '1', sjk: '2', sl: '1', ppxh: '', ycyw: '1', sfrz: ['1'], blj: '1',}
-            ],      //sbhjs_fwq
-            sys_sbhjs: [
-              {type: '2', sbmc: 'SSL VPN', ppxh: '', sl: '1', gmsf: '2', smzs: '2', ycyw: '1', sfrz: ['1'], blj: '1'},
-              {type: '2', sbmc: 'IPsec VPN', ppxh: '', sl: '1', gmsf: '2', smzs: '2', ycyw: '1', sfrz: ['1'], blj: '1'},
-              {type: '2', sbmc: '堡垒机', ppxh: '', sl: '1', gmsf: '2', smzs: '2', ycyw: '1', sfrz: ['1'], blj: '1'},
-            ],     //sbhjs_zysb
-            sys_ywyy: [
-              {ywyy: '', gnms: '', fwfs: '1', bkfr: '1', jtqk1: '', dzqm: '1', jtqk2: ''},
-            ],       //yyhsj_ywyy_zysj
-            sys_zysj: [
-              {
-                ywyy: '', sjlx: '1', sjnr: '用户名口令、单个用户单位时间内的登录次数和失败次数、单个IP地址单位时间内的登录次数和失败次数、密保问题',
-                bhxq: '机密性、完整性', ccjm: '3', sjl: '', csjm: '4', ll: ''
-              },
-              {ywyy: '', sjlx: '2', sjnr: '', ccjm: '3', bhxq: '机密性、完整性', sjl: '', csjm: '4', ll: ''},
-              {
-                ywyy: '', sjlx: '3', sjnr: '认证登录日志、配置操作日志、受终端操作日志、管理平台操作日志、涉密数据操作日志、外发数据操作日志',
-                bhxq: '完整性', ccjm: '3', sjl: '', csjm: '4', ll: ''
-              },
-              {
-                ywyy: '',
-                sjlx: '4',
-                sjnr: '身份证、手机号、银行账户、存款信息、以往病例',
-                bhxq: '机密性、完整性',
-                ccjm: '3',
-                sjl: '',
-                csjm: '4',
-                ll: ''
-              },
-              {ywyy: '', sjlx: '5', sjnr: '档案、合同、证据', bhxq: '不可否认性', ccjm: '3', sjl: '', csjm: '4', ll: ''},
-              {
-                ywyy: '',
-                sjlx: '6',
-                sjnr: '安全策略、资源访问控制列表、数据库安全策略、用户权限列表',
-                ccjm: '3',
-                bhxq: '完整性',
-                sjl: '',
-                csjm: '4',
-                ll: ''
-              },
-            ],       //yyhsj_ywyy_zysjqk
-            sbqd: [{
-              id: 1,
-              name: '服务器密码机',
-              jbxh: 'QuickHSM-HS1000',
-              lb: '硬件',
-              num: 2,
-              remark: '一主一备，可按需动态扩展'
-            }, {
-              id: 2,
-              name: '服务器密码机',
-              jbxh: 'QuickHSM-HS-XC',
-              lb: '硬件',
-              num: 0,
-              remark: '一主一备，可按需动态扩展'
-            }, {
-              id: 3,
-              name: '签名验签服务器',
-              jbxh: 'QuickSVS-XC-A',
-              lb: '硬件',
-              num: 2,
-              remark: '一主一备，可按需动态扩展'
-            }, {
-              id: 4,
-              name: '签名验签服务器',
-              jbxh: 'QuickSVS-XC-B',
-              lb: '硬件',
-              num: 0,
-              remark: '一主一备，可按需动态扩展'
-            }, {
-              id: 5,
-              name: '国密安全密码应用中间件',
-              jbxh: 'QUICKCSP-500',
-              lb: '软件',
-              num: 2,
-              remark: '一主一备，可按需动态扩展'
-            }, {
-              id: 6,
-              name: '国密数字证书',
-              jbxh: 'HLJCA-Individual-Cert',
-              lb: '服务',
-              num: 9999,
-              remark: ''
-            }, {
-              id: 7,
-              name: '智能密码钥匙',
-              jbxh: 'SJK19123',
-              lb: '硬件',
-              num: 9999,
-              remark: ''
-            }, {
-              id: 8,
-              name: 'SSL VPN安全网关',
-              jbxh: ' ',
-              lb: '硬件',
-              num: 2,
-              remark: '一主一备，可按需动态扩展'
-            }, {
-              id: 9,
-              name: '时间戳服务器',
-              jbxh: 'QuickTSS-1000',
-              lb: '硬件',
-              num: 0,
-              remark: ''
-            }, {
-              id: 10,
-              name: '协同签名系统',
-              jbxh: 'SRT1934-2000',
-              lb: '硬件',
-              num: 0,
-              remark: ''
-            }, {
-              id: 11,
-              name: '安全电子签章系统',
-              jbxh: 'SC900-2000',
-              lb: '硬件',
-              num: 0,
-              remark: ''
-            }, {
-              id: 12,
-              name: '可信浏览器',
-              jbxh: ' ',
-              lb: '软件',
-              num: 9999,
-              remark: ''
-            }, {
-              id: 13,
-              name: 'IPSec VPN安全网关',
-              jbxh: ' ',
-              lb: '硬件',
-              num: 0,
-              remark: '每个网络部署一组，一主一备，可按需动态扩展'
-            }, {
-              id: 14,
-              name: '密钥管理系统',
-              jbxh: 'QuickKMS',
-              lb: '硬件',
-              num: 0,
-              remark: ''
-            }, {
-              id: 15,
-              name: '国密堡垒机',
-              jbxh: ' ',
-              lb: '硬件',
-              num: 0,
-              remark: '一主一备，可按需动态扩展'
-            }, {
-              id: 16,
-              name: '数字证书认证系统',
-              jbxh: 'SZT1913-2000',
-              lb: '硬件',
-              num: 0,
-              remark: ''
-            }, {
-              id: 17,
-              name: '国密设备证书',
-              jbxh: 'HLJCA-Equipment-Cert',
-              lb: '软件',
-              num: 0,
-              remark: ''
-            }, {
-              id: 18,
-              name: '国密SSL证书证书',
-              jbxh: 'GDCA-DV-STAR-SSL',
-              lb: '软件',
-              num: 0,
-              remark: ''
-            }, {
-              id: 19,
-              name: '云服务器密码机',
-              jbxh: 'QuickHSM-VSM1000-VSM16',
-              lb: '硬件',
-              num: 0,
-              remark: '一主一备，可按需动态扩展'
-            }, {
-              id: 20,
-              name: '云服务器密码机',
-              jbxh: 'QuickHSM-VSM1000-VSM32',
-              lb: '硬件',
-              num: 0,
-              remark: '一主一备，可按需动态扩展'
-            }, {
-              id: 21,
-              name: '国密安全密码应用中间件（云版）',
-              jbxh: 'QUICKCSP-C-B',
-              lb: '软件',
-              num: 0,
-              remark: '在有CSMP的情况下选用，具体数量根据实际租户来，若没有租户数量就直接写10个'
-            }, {
-              id: 22,
-              name: '云安全管理平台（CSMP）',
-              jbxh: 'QUICKCSP-CSMP',
-              lb: '软件',
-              num: 0,
-              remark: ''
-            }, {
-              id: 23,
-              name: '国密门禁系统',
-              jbxh: ' ',
-              lb: '硬件',
-              num: 0,
-              remark: ''
-            }, {
-              id: 24,
-              name: '国密电子监控系统',
-              jbxh: ' ',
-              lb: '硬件',
-              num: 0,
-              remark: ''
-            }, {
-              id: 25,
-              name: '密码应用技术服务',
-              jbxh: ' ',
-              lb: '服务',
-              num: 1,
-              remark: ''
-            }],
-          }
-          var jsonData = JSON.stringify(data_tmp)
-          console.log(jsonData)
-          that.$router.push({
-            name: 'questionnaire', params: {
-              data: data_tmp
-            }
-          })
-        } else {
-          var jsonData = JSON.stringify(response.data.data)
-          console.log(jsonData)
-          that.$router.push({
-            name: 'questionnaire', params: {
-              data: response.data.data
-            }
-          })
-        }
-      }).catch(function (error) {
-        alert('通信错误，请联系管理员')
-        console.error(error)
       })
     },
-    handleSelect (key, keyPath) {
-      if (key == 1) {
-        this.$router.push({path: '/addque'})
+
+    addque(){     //创建项目仓库
+      //this.$router.push({path: '/addque'})    //换成弹窗
+      let that = this
+
+      this.$prompt('请输入项目名称', '新增项目', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
+        if(value == null){
+          alert('项目名称不能为空')
+          return;
+        }
+        //传递JSON
+        axios.post('/api/createQuestionnaire', {
+            xmmc: value,
+            cjr: this.yonghu,        //获取姓名
+            //zdls: this.zdls,      //暂无
+            xmsm: this.xmsm       //暂无
+          }, {
+            headers: {
+              'token': window.sessionStorage['token']
+            }
+          }
+        ).then(function (response) {
+          if (response.data.retcode == 'ok') {
+            that.$message({
+              message: '成功',
+              type: 'success'
+            })
+            location.reload()
+          } else {
+            alert('请更换项目名称或联系管理员')
+          }
+        }).catch(function (error) {
+          that.loading = false
+          alert('通信错误，请联系管理员')
+          console.error(error)
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });
+      });
+    },
+    handleSelectFileType(key, keyPath){
+      if (key == 1) {   //新增项目
       } else if (key == 2) {
-        this.$router.push({path: '/choose'})
+        this.daohanglan = "所有项目"
+      } else if (key == 3) {
+        this.daohanglan ="您的项目"
+      } else if (key == 4) {
+        this.daohanglan = "已归档项目"
+      } else if (key == 5) {
+        this.daohanglan = "已删除项目"
       }
+
     }
+
   },
   mounted: function () {
     let that = this
@@ -420,3 +215,19 @@ export default {
   },
 }
 </script>
+
+<style>
+  .el-menu{
+    border: 0!important;
+  }
+
+  body{
+    margin: 0px;
+  }
+  .el-menu-vertical-demo{
+    height: 150vh;
+    border-right: none;
+    overflow-y: auto;
+  }
+
+</style>

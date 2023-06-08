@@ -101,6 +101,7 @@
 
 <style scoped>
 
+
 .el-menu{
   height: 100%;
 }
@@ -113,7 +114,9 @@
 
 
 
-
+.el-form .el-select{
+  width: 100%;
+}
 
 .Container{
   position: absolute;
@@ -233,7 +236,6 @@ export default {
       this.load()
     },
 
-
     handleClose(){
 
     },
@@ -243,6 +245,7 @@ export default {
         this.$router.push({path: '/usermanagement'})
       } else if (key == 2) {
         this.$router.push({path: '/statistics'})
+
       }
     }
 
@@ -254,11 +257,5 @@ export default {
 
 }
 </script>
-
-<style>
-.el-form .el-select{
-  width: 100%;
-}
-</style>
 
 
