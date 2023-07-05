@@ -15,21 +15,25 @@
       <el-menu-item index="4">文件管理</el-menu-item>
       <el-menu-item index="5">评分系统</el-menu-item>
     </el-menu>
-
+    <br>
+  <div style="margin-left:30px">
     <el-form :model="Form" label-width="0px" label-position="left">
-      <el-form-item>
-        系统名称&nbsp;&nbsp;
-        <el-input v-model="sys_name" :disabled="true" style="width: 30%"></el-input>
-        &nbsp;&nbsp;<el-button type="success" @click="saveChoose">保存表单</el-button>
-        &nbsp;<el-button @click="submit" type="primary">生成方案</el-button>
-        &nbsp;<el-button @click="generateSBQD" type="primary">生成设备清单</el-button>
-        &nbsp;<el-button @click="xmpf" type="danger">项目评分</el-button>
-      </el-form-item>
-    </el-form>
-    *号为必填
+    <el-form-item>
+      系统名称&nbsp;&nbsp;
+      <el-input v-model="sys_name" :disabled="true" style="width: 30%"></el-input>
+      &nbsp;&nbsp;<el-button type="success" @click="saveChoose">保存表单</el-button>
+      &nbsp;<el-button @click="submit" type="primary">生成方案</el-button>
+      &nbsp;<el-button @click="generateSBQD" type="primary">生成设备清单</el-button>
+      &nbsp;<el-button @click="xmpf" type="danger">项目评分</el-button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 表单中*号为必填项目
+    </el-form-item>
+  </el-form>
+
+  </div>
     <el-tabs v-model="activeName">
       <el-tab-pane label="基本情况" name="one">
-        <el-form :model="Form" label-width="120px" label-position="left">
+        <div style="margin-left:30px; margin-right:30px">
+          <el-form :model="Form" label-width="120px" label-position="left">
           <el-form-item label="*责任单位">
             <el-input v-model="sys_unit" placeholder="请输入责任单位" style="width: 20%"></el-input>
           </el-form-item>
@@ -165,34 +169,36 @@
           <el-form-item label="等保定级时间">
             <el-input v-model="sys_dbsj" placeholder="请输入完成等保定级时间" style="width: 20%"></el-input>
           </el-form-item>
-            <el-form-item label="定级预备编号">
-              <el-input v-model="sys_djbh" placeholder="请输入网络保护等级的定级预备编号" style="width: 20%"></el-input>
-            </el-form-item>
-            <el-form-item label="测评机构">
-              <el-input v-model="sys_cpjg" placeholder="请输入等保测评机构" style="width: 20%"></el-input>
-            </el-form-item>
-              <el-form-item label="单位地址">
-                <el-input v-model="sys_dwdz" placeholder="请输入单位地址" style="width: 20%"></el-input>
-              </el-form-item>
-              <el-form-item label="上线时间">
-                <el-input v-model="sys_sxsj" placeholder="请输入系统上线时间" style="width: 20%"></el-input>
-              </el-form-item>
-              <br>
-              <el-form-item
-                v-for="(i, index) in dynamicYwyyForm.ywyy"
-                :label="'业务应用' + index"
-                :key="i.key"
-                :prop="'ywyy' + index + 'value'"
-              >
-                <el-input v-model="i.value" style="width: 400px" @change="dynamicYwyyChange(index,i)"></el-input>
-                <el-button @click.prevent="removeDomain(i)">删除</el-button>
-              </el-form-item>
-              <el-form-item>
-                <el-button @click="addDomain">新增业务</el-button>
-              </el-form-item>
+          <el-form-item label="定级预备编号">
+            <el-input v-model="sys_djbh" placeholder="请输入网络保护等级的定级预备编号" style="width: 20%"></el-input>
+          </el-form-item>
+          <el-form-item label="测评机构">
+            <el-input v-model="sys_cpjg" placeholder="请输入等保测评机构" style="width: 20%"></el-input>
+          </el-form-item>
+          <el-form-item label="单位地址">
+            <el-input v-model="sys_dwdz" placeholder="请输入单位地址" style="width: 20%"></el-input>
+          </el-form-item>
+          <el-form-item label="上线时间">
+            <el-input v-model="sys_sxsj" placeholder="请输入系统上线时间" style="width: 20%"></el-input>
+          </el-form-item>
+          <br>
+          <el-form-item
+            v-for="(i, index) in dynamicYwyyForm.ywyy"
+            :label="'业务应用' + index"
+            :key="i.key"
+            :prop="'ywyy' + index + 'value'"
+          >
+            <el-input v-model="i.value" style="width: 400px" @change="dynamicYwyyChange(index,i)"></el-input>
+            <el-button @click.prevent="removeDomain(i)">删除</el-button>
+          </el-form-item>
+          <el-form-item>
+            <el-button @click="addDomain">新增业务</el-button>
+          </el-form-item>
         </el-form>
+        </div>
       </el-tab-pane>
       <el-tab-pane label="系统用户情况" name="three">
+        <div style="margin-left:30px; margin-right:30px">
         <el-form label-width="120px">
           <el-row>
             <el-col :span="24">
@@ -285,9 +291,11 @@
           </el-alert>
           <br>
         </div>
+        </div>
       </el-tab-pane>
       <el-tab-pane label="物理和环境" name="four">
-        <el-form label-width="120px">
+        <div style="margin-left:30px; margin-right:30px">
+          <el-form label-width="120px">
           <el-row>
             <el-col :span="24">
               <el-form-item label="物理和环境">
@@ -380,9 +388,11 @@
             </el-table>
           </el-row>
         </el-form>
-
+        </div>
       </el-tab-pane>
       <el-tab-pane label="网络和通信" name="five">
+        <div style="margin-left:30px; margin-right:30px">
+
         测评对象是跨网络访问的通信信道，特别指从不受保护的网络区域访问被测系统，一般从通信主体和所在网络类型来分析，网络类型分为互联网(完全公开)、办公局域网(如公务员办公接入政务外网、医生办公接入医院局域网等)、内网(如机房内网络、某些专线网络)等。如果通信主体是XXX机房、XXX设备、XXX系统，请手动输入并注意一定要具有"机房"、"设备"、"系统"关键词。只有互联网有移动端对应通道。
         <el-form label-width="120px">
           <el-row>
@@ -480,482 +490,493 @@
             </el-table>
           </el-row>
         </el-form>
+        </div>
       </el-tab-pane>
       <el-tab-pane label="设备和计算（服务器）" name="six">
-        测评对象是设备,需要了解该信息系统涉及哪些设备？同品牌型号的专用设备归为一个测评对象,相同硬件、软件的服务器可归为一个测评对象。
-        <br>
-        <el-form label-width="310px">
-          <el-row>
-            <el-col :span="24">
-              <el-form-item label="设备和计算：目标信息系统所在的服务器情况">
-                <el-button type="primary" size="mini" @click="handlesbhjsfwq()" icon="el-icon-plus"></el-button>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-table :data="sbhjs_fwq" border :header-cell-style="{background:'#b8bbbf',color:'#606266'}">
-              <el-table-column align="center" label="*设备名称">
-                <template slot-scope="scope">
-                  <el-input v-model="scope.row.sbmc" placeholder="请输入"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column align="left" header-align="center" label="品牌型号">
-                <template slot-scope="scope">
-                  <el-input v-model="scope.row.ppxh" placeholder="请输入"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="数量" width="160px">
-                <template slot-scope="scope">
-                  <el-input-number v-model="scope.row.sl" :min="1" :max="100000" size="small"></el-input-number>
-                </template>
-              </el-table-column>
-              <el-table-column align="left" header-align="center" label="*操作系统" width="150px">
-                <template slot-scope="scope">
-                  <el-radio-group v-model="scope.row.czxt">
-                    <div>
-                      <el-radio label="1">Linux</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="2">Windows</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="3">UNIX</el-radio>
-                    </div>
-                    <br>
-                  </el-radio-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="left" header-align="center" label="*数据库" width="250px">
-                <template slot-scope="scope">
-                  <el-radio-group v-model="scope.row.sjk">
-                    <el-col :span="12">
-                      <el-radio label="1">Oracle</el-radio>
-                      <el-radio label="2">MySQL</el-radio>
-                      <el-radio label="3">SQL Server</el-radio>
-                      <el-radio label="7">无</el-radio>
-                    </el-col>
-                    <el-col :span="8">
-                      <el-radio label="4">MongoDB</el-radio>
-                      <el-radio label="5">DB2</el-radio>
-                      <el-radio label="6">PostgreSQL</el-radio>
-                    </el-col>
-                  </el-radio-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="*是否支持远程运维" width="120px">
-                <template slot-scope="scope">
-                  <el-radio-group v-model="scope.row.ycyw">
-                    <div>
-                      <el-radio label="1">是</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="2">否</el-radio>
-                    </div>
-                  </el-radio-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="left" header-align="center" label="*运维人身份认证(多选)">
-                <template slot-scope="scope">
-                  <el-checkbox-group v-model="scope.row.sfrz">
-                    <el-checkbox
-                      v-for="item in sbhjs_sfrz_options"
-                      :key="item.value"
-                      :label="item.value"
-                    >{{ item.label }}
-                    </el-checkbox>
-                  </el-checkbox-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="*通过堡垒机管理" width="120px">
-                <template slot-scope="scope">
-                  <el-radio-group v-model="scope.row.blj">
-                    <div>
-                      <el-radio label="1">是</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="2">否</el-radio>
-                    </div>
-                  </el-radio-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="操作" width="80px">
-                <template slot-scope="scope">
-                  <el-button type="danger" size="mini" @click="sbhjs_fwqDelete(scope.$index)">删除</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-          </el-row>
-        </el-form>
+        <div style="margin-left:30px; margin-right:30px">
+          测评对象是设备,需要了解该信息系统涉及哪些设备？同品牌型号的专用设备归为一个测评对象,相同硬件、软件的服务器可归为一个测评对象。
+          <br>
+          <el-form label-width="310px">
+            <el-row>
+              <el-col :span="24">
+                <el-form-item label="设备和计算：目标信息系统所在的服务器情况">
+                  <el-button type="primary" size="mini" @click="handlesbhjsfwq()" icon="el-icon-plus"></el-button>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-table :data="sbhjs_fwq" border :header-cell-style="{background:'#b8bbbf',color:'#606266'}">
+                <el-table-column align="center" label="*设备名称">
+                  <template slot-scope="scope">
+                    <el-input v-model="scope.row.sbmc" placeholder="请输入"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column align="left" header-align="center" label="品牌型号">
+                  <template slot-scope="scope">
+                    <el-input v-model="scope.row.ppxh" placeholder="请输入"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="数量" width="160px">
+                  <template slot-scope="scope">
+                    <el-input-number v-model="scope.row.sl" :min="1" :max="100000" size="small"></el-input-number>
+                  </template>
+                </el-table-column>
+                <el-table-column align="left" header-align="center" label="*操作系统" width="150px">
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="scope.row.czxt">
+                      <div>
+                        <el-radio label="1">Linux</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="2">Windows</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="3">UNIX</el-radio>
+                      </div>
+                      <br>
+                    </el-radio-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="left" header-align="center" label="*数据库" width="250px">
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="scope.row.sjk">
+                      <el-col :span="12">
+                        <el-radio label="1">Oracle</el-radio>
+                        <el-radio label="2">MySQL</el-radio>
+                        <el-radio label="3">SQL Server</el-radio>
+                        <el-radio label="7">无</el-radio>
+                      </el-col>
+                      <el-col :span="8">
+                        <el-radio label="4">MongoDB</el-radio>
+                        <el-radio label="5">DB2</el-radio>
+                        <el-radio label="6">PostgreSQL</el-radio>
+                      </el-col>
+                    </el-radio-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="*是否支持远程运维" width="120px">
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="scope.row.ycyw">
+                      <div>
+                        <el-radio label="1">是</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="2">否</el-radio>
+                      </div>
+                    </el-radio-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="left" header-align="center" label="*运维人身份认证(多选)">
+                  <template slot-scope="scope">
+                    <el-checkbox-group v-model="scope.row.sfrz">
+                      <el-checkbox
+                        v-for="item in sbhjs_sfrz_options"
+                        :key="item.value"
+                        :label="item.value"
+                      >{{ item.label }}
+                      </el-checkbox>
+                    </el-checkbox-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="*通过堡垒机管理" width="120px">
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="scope.row.blj">
+                      <div>
+                        <el-radio label="1">是</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="2">否</el-radio>
+                      </div>
+                    </el-radio-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="操作" width="80px">
+                  <template slot-scope="scope">
+                    <el-button type="danger" size="mini" @click="sbhjs_fwqDelete(scope.$index)">删除</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-row>
+          </el-form>
+        </div>
       </el-tab-pane>
       <el-tab-pane label="设备和计算（专用设备）" name="seven">
-        密码产品/设备包括：服务器密码机、云密码机、签名验签服务器、时间戳服务器、证书认证系统、(手机盾)协同签名系统、安全电子签章系统、密钥管理系统等;具有密码功能的网络及安全设备包括：SSL VPN、IPSec
-        VPN、堡垒机等; 采用密码技术的其他产品包括：动态口令系统、统一身份认证系统、特权账号管理系统等，没有密码功能的网络及安全设备包括路由器、交换机、防火墙、入侵检测系统等，虚拟设备和系统包括云计算平台、超融合一体机等。
-        <br>
-        <el-form label-width="310px">
-          <el-row>
-            <el-col :span="24">
-              <el-form-item label="设备和计算：目标系统所涉及的专用设备情况">
-                <el-button type="primary" size="mini" @click="handlesbhjszysb()" icon="el-icon-plus"></el-button>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-table :data="sbhjs_zysb" border :header-cell-style="{background:'#b8bbbf',color:'#606266'}">
-              <el-table-column align="center" label="*设备类型" width="230px">
-                <template slot-scope="scope">
-                  <el-select v-model="scope.row.type" placeholder="请选择">
-                    <el-option
-                      v-for="item in sbhjs_type_options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="*设备名称">
-                <template slot-scope="scope">
-                  <el-input v-model="scope.row.sbmc" placeholder="请输入"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="品牌型号">
-                <template slot-scope="scope">
-                  <el-input v-model="scope.row.ppxh" placeholder="请输入"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="数量" width="160px">
-                <template slot-scope="scope">
-                  <el-input-number v-model="scope.row.sl" :min="1" :max="100000" size="small"></el-input-number>
-                </template>
-              </el-table-column>
-              <el-table-column align="left" header-align="center" label="*是否支持国密算法" width="120px">
-                <template slot-scope="scope">
-                  <el-radio-group v-model="scope.row.gmsf">
-                    <el-col :span="20">
-                      <el-radio label="1">是</el-radio>
-                    </el-col>
-                    <el-col :span="1">
-                      <el-radio label="2">否</el-radio>
-                    </el-col>
-                  </el-radio-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="left" header-align="center" label="*是否有商密证书" width="120px">
-                <template slot-scope="scope">
-                  <el-radio-group v-model="scope.row.smzs">
-                    <el-col :span="20">
-                      <el-radio label="1">是</el-radio>
-                    </el-col>
-                    <el-col :span="1">
-                      <el-radio label="2">否</el-radio>
-                    </el-col>
-                  </el-radio-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="left" header-align="center" label="*是否支持远程运维" width="120px">
-                <template slot-scope="scope">
-                  <el-radio-group v-model="scope.row.ycyw">
-                    <el-col :span="20">
-                      <el-radio label="1">是</el-radio>
-                    </el-col>
-                    <el-col :span="1">
-                      <el-radio label="2">否</el-radio>
-                    </el-col>
-                  </el-radio-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="left" header-align="center" label="*运维人身份认证(多选)">
-                <template slot-scope="scope">
-                  <el-checkbox-group v-model="scope.row.sfrz">
-                    <el-checkbox
-                      v-for="item in sbhjs_sfrz_options"
-                      :key="item.value"
-                      :label="item.value">
-                      {{ item.label }}
-                    </el-checkbox>
-                  </el-checkbox-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="*通过堡垒机管理" width="120px">
-                <template slot-scope="scope">
-                  <el-radio-group v-model="scope.row.blj">
-                    <div>
-                      <el-radio label="1">是</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="2">否</el-radio>
-                    </div>
-                  </el-radio-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="操作" width="80px">
-                <template slot-scope="scope">
-                  <el-button type="danger" size="mini" @click="sbhjs_zysbDelete(scope.$index)">删除</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-          </el-row>
-        </el-form>
+        <div style="margin-left:30px; margin-right:30px">
+          密码产品/设备包括：服务器密码机、云密码机、签名验签服务器、时间戳服务器、证书认证系统、(手机盾)协同签名系统、安全电子签章系统、密钥管理系统等;具有密码功能的网络及安全设备包括：SSL VPN、IPSec
+          VPN、堡垒机等; 采用密码技术的其他产品包括：动态口令系统、统一身份认证系统、特权账号管理系统等，没有密码功能的网络及安全设备包括路由器、交换机、防火墙、入侵检测系统等，虚拟设备和系统包括云计算平台、超融合一体机等。
+          <br>
+          <el-form label-width="310px">
+            <el-row>
+              <el-col :span="24">
+                <el-form-item label="设备和计算：目标系统所涉及的专用设备情况">
+                  <el-button type="primary" size="mini" @click="handlesbhjszysb()" icon="el-icon-plus"></el-button>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-table :data="sbhjs_zysb" border :header-cell-style="{background:'#b8bbbf',color:'#606266'}">
+                <el-table-column align="center" label="*设备类型" width="230px">
+                  <template slot-scope="scope">
+                    <el-select v-model="scope.row.type" placeholder="请选择">
+                      <el-option
+                        v-for="item in sbhjs_type_options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="*设备名称">
+                  <template slot-scope="scope">
+                    <el-input v-model="scope.row.sbmc" placeholder="请输入"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="品牌型号">
+                  <template slot-scope="scope">
+                    <el-input v-model="scope.row.ppxh" placeholder="请输入"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="数量" width="160px">
+                  <template slot-scope="scope">
+                    <el-input-number v-model="scope.row.sl" :min="1" :max="100000" size="small"></el-input-number>
+                  </template>
+                </el-table-column>
+                <el-table-column align="left" header-align="center" label="*是否支持国密算法" width="120px">
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="scope.row.gmsf">
+                      <el-col :span="20">
+                        <el-radio label="1">是</el-radio>
+                      </el-col>
+                      <el-col :span="1">
+                        <el-radio label="2">否</el-radio>
+                      </el-col>
+                    </el-radio-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="left" header-align="center" label="*是否有商密证书" width="120px">
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="scope.row.smzs">
+                      <el-col :span="20">
+                        <el-radio label="1">是</el-radio>
+                      </el-col>
+                      <el-col :span="1">
+                        <el-radio label="2">否</el-radio>
+                      </el-col>
+                    </el-radio-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="left" header-align="center" label="*是否支持远程运维" width="120px">
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="scope.row.ycyw">
+                      <el-col :span="20">
+                        <el-radio label="1">是</el-radio>
+                      </el-col>
+                      <el-col :span="1">
+                        <el-radio label="2">否</el-radio>
+                      </el-col>
+                    </el-radio-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="left" header-align="center" label="*运维人身份认证(多选)">
+                  <template slot-scope="scope">
+                    <el-checkbox-group v-model="scope.row.sfrz">
+                      <el-checkbox
+                        v-for="item in sbhjs_sfrz_options"
+                        :key="item.value"
+                        :label="item.value">
+                        {{ item.label }}
+                      </el-checkbox>
+                    </el-checkbox-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="*通过堡垒机管理" width="120px">
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="scope.row.blj">
+                      <div>
+                        <el-radio label="1">是</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="2">否</el-radio>
+                      </div>
+                    </el-radio-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="操作" width="80px">
+                  <template slot-scope="scope">
+                    <el-button type="danger" size="mini" @click="sbhjs_zysbDelete(scope.$index)">删除</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-row>
+          </el-form>
+        </div>
       </el-tab-pane>
       <el-tab-pane label="应用和数据（业务应用）" name="eight">
-        业务应用，按该系统对外提供的服务或子系统，包括且不限于Web服务、数据服务、接口服务等
-        <br>
-        <el-form label-width="310px">
-          <el-row>
-            <el-col :span="24">
-              <el-form-item label="应用和数据：测评对象是业务应用以及重要数据">
-                <el-button type="primary" size="mini" @click="handleyyhsjywyy()" icon="el-icon-plus"></el-button>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-table :data="yyhsj_ywyy_zysj" border :header-cell-style="{background:'#b8bbbf',color:'#606266'}">
-              <el-table-column align="center" label="*业务应用" width="230px">
-                <template slot-scope="scope">
-                  <el-select allow-create
-                             filterable v-model="scope.row.ywyy" placeholder="请选择">
-                    <el-option
-                      v-for="item in dynamicYwyyForm.ywyy"
-                      :key="item.value"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="功能描述" width="250px">
-                <template slot-scope="scope">
-                  <el-input type="textarea" :rows="4" placeholder="请输入内容"
-                            v-model="scope.row.gnms"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column align="left" header-align="center" label="*对外服务方式" width="100px">
-                <template slot-scope="scope">
-                  <el-radio-group v-model="scope.row.fwfs">
-                    <div>
-                      <el-radio label="1">HTTPS</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="2">HTTP</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="3">其它</el-radio>
-                    </div>
-                  </el-radio-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="left" header-align="center" label="*操作需要不可否认性" width="160px">
-                <template slot-scope="scope">
-                  <el-radio-group v-model="scope.row.bkfr">
-                    <div>
-                      <el-radio label="1">没有需求</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="2">有需求&未做</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="3">有需求&已做</el-radio>
-                    </div>
-                  </el-radio-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="操作需要不可否认性的具体情况">
-                <template slot-scope="scope">
-                  <el-input type="textarea" :rows="4" placeholder="请输入内容"
-                            v-model="scope.row.jtqk1"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column align="left" header-align="center" label="*需要电子签名&电子印章" width="160px">
-                <template slot-scope="scope">
-                  <el-radio-group v-model="scope.row.dzqm">
-                    <div>
-                      <el-radio label="1">没有需求</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="2">有需求&未做</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="3">有需求&已做</el-radio>
-                    </div>
-                  </el-radio-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="需要电子签名&电子印章的具体情况">
-                <template slot-scope="scope">
-                  <el-input type="textarea" :rows="4" placeholder="请输入内容"
-                            v-model="scope.row.jtqk2"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="操作" width="80px">
-                <template slot-scope="scope">
-                  <el-button type="danger" size="mini" @click="yyhsj_ywyy_zysjDelete(scope.$index)">删除</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-          </el-row>
-        </el-form>
-        <div>
+        <div style="margin-left:30px; margin-right:30px">
+          业务应用，按该系统对外提供的服务或子系统，包括且不限于Web服务、数据服务、接口服务等
           <br>
-          <el-alert title="请注意业务应用的对应关系" type="warning"
-                    description="请保证系统用户情况中的【业务应用】与应用和数据（业务应用、重要数据）中的【业务应用】保持一致"
-                    show-icon>
-          </el-alert>
-          <br>
+          <el-form label-width="310px">
+            <el-row>
+              <el-col :span="24">
+                <el-form-item label="应用和数据：测评对象是业务应用以及重要数据">
+                  <el-button type="primary" size="mini" @click="handleyyhsjywyy()" icon="el-icon-plus"></el-button>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-table :data="yyhsj_ywyy_zysj" border :header-cell-style="{background:'#b8bbbf',color:'#606266'}">
+                <el-table-column align="center" label="*业务应用" width="230px">
+                  <template slot-scope="scope">
+                    <el-select allow-create
+                               filterable v-model="scope.row.ywyy" placeholder="请选择">
+                      <el-option
+                        v-for="item in dynamicYwyyForm.ywyy"
+                        :key="item.value"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="功能描述" width="250px">
+                  <template slot-scope="scope">
+                    <el-input type="textarea" :rows="4" placeholder="请输入内容"
+                              v-model="scope.row.gnms"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column align="left" header-align="center" label="*对外服务方式" width="100px">
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="scope.row.fwfs">
+                      <div>
+                        <el-radio label="1">HTTPS</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="2">HTTP</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="3">其它</el-radio>
+                      </div>
+                    </el-radio-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="left" header-align="center" label="*操作需要不可否认性" width="160px">
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="scope.row.bkfr">
+                      <div>
+                        <el-radio label="1">没有需求</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="2">有需求&未做</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="3">有需求&已做</el-radio>
+                      </div>
+                    </el-radio-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="操作需要不可否认性的具体情况">
+                  <template slot-scope="scope">
+                    <el-input type="textarea" :rows="4" placeholder="请输入内容"
+                              v-model="scope.row.jtqk1"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column align="left" header-align="center" label="*需要电子签名&电子印章" width="160px">
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="scope.row.dzqm">
+                      <div>
+                        <el-radio label="1">没有需求</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="2">有需求&未做</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="3">有需求&已做</el-radio>
+                      </div>
+                    </el-radio-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="需要电子签名&电子印章的具体情况">
+                  <template slot-scope="scope">
+                    <el-input type="textarea" :rows="4" placeholder="请输入内容"
+                              v-model="scope.row.jtqk2"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="操作" width="80px">
+                  <template slot-scope="scope">
+                    <el-button type="danger" size="mini" @click="yyhsj_ywyy_zysjDelete(scope.$index)">删除</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-row>
+          </el-form>
+          <div>
+            <br>
+            <el-alert title="请注意业务应用的对应关系" type="warning"
+                      description="请保证系统用户情况中的【业务应用】与应用和数据（业务应用、重要数据）中的【业务应用】保持一致"
+                      show-icon>
+            </el-alert>
+            <br>
+          </div>
         </div>
       </el-tab-pane>
       <el-tab-pane label="应用和数据（重要数据）" name="nine">
-        <el-form label-width="110px">
-          <el-row>
-            <el-col :span="24">
-              必须有访问控制信息
-              <el-form-item label="重要数据情况">
-                <el-button type="primary" size="mini" @click="handleyyhsjzysj()" icon="el-icon-plus"></el-button>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-table :data="yyhsj_ywyy_zysjqk" border :header-cell-style="{background:'#b8bbbf',color:'#606266'}">
-              <el-table-column align="center" label="*业务应用" width="230px">
-                <template slot-scope="scope">
-                  <el-select allow-create
-                             filterable v-model="scope.row.ywyy" placeholder="请选择">
-                    <el-option
-                      v-for="item in dynamicYwyyForm.ywyy"
-                      :key="item.value"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="*数据类型" width="240px">
-                <template slot-scope="scope">
-                  <el-select v-model="scope.row.sjlx" placeholder="请选择">
-                    <el-option
-                      v-for="item in zysjqk_sjlx_options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value">
-                    </el-option>
-                  </el-select>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="数据内容">
-                <template slot-scope="scope">
-                  <el-input type="textarea" :rows="4"
-                            placeholder='请输入内容'
-                            v-model="scope.row.sjnr"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="保护需求">
-                <template slot-scope="scope">
-                  <el-input type="textarea" :rows="4" placeholder='请输入内容'
-                            v-model="scope.row.bhxq"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column align="left" header-align="center" label="*存储加密" width="100px">
-                <template slot-scope="scope">
-                  <el-radio-group v-model="scope.row.ccjm">
-                    <div>
-                      <el-radio label="1">国密</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="2">非国密</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="3">未加密</el-radio>
-                    </div>
-                  </el-radio-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="数据量" width="100px">
-                <template slot-scope="scope">
-                  <el-input v-model="scope.row.sjl" placeholder="请输入"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column align="left" header-align="center" label="*传输加密" width="100px">
-                <template slot-scope="scope">
-                  <el-radio-group v-model="scope.row.csjm">
-                    <div>
-                      <el-radio label="1">不涉及</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="2">国密</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="3">非国密</el-radio>
-                    </div>
-                    <br>
-                    <div>
-                      <el-radio label="4">未加密</el-radio>
-                    </div>
-                  </el-radio-group>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="流量" width="100px">
-                <template slot-scope="scope">
-                  <el-input v-model="scope.row.ll" placeholder="请输入"></el-input>
-                </template>
-              </el-table-column>
-              <el-table-column align="center" label="操作" width="80px">
-                <template slot-scope="scope">
-                  <el-button type="danger" size="mini" @click="yyhsj_ywyy_zysjqkDelete(scope.$index)">删除</el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-          </el-row>
-        </el-form>
-        <div>
-          <br>
-          <el-alert title="请注意业务应用的对应关系" type="warning"
-                    description="请保证系统用户情况中的【业务应用】与应用和数据（业务应用、重要数据）中的【业务应用】保持一致"
-                    show-icon>
-          </el-alert>
-          <br>
+        <div style="margin-left:30px; margin-right:30px">
+          <el-form label-width="110px">
+            <el-row>
+              <el-col :span="24">
+                必须有访问控制信息
+                <el-form-item label="重要数据情况">
+                  <el-button type="primary" size="mini" @click="handleyyhsjzysj()" icon="el-icon-plus"></el-button>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-table :data="yyhsj_ywyy_zysjqk" border :header-cell-style="{background:'#b8bbbf',color:'#606266'}">
+                <el-table-column align="center" label="*业务应用" width="230px">
+                  <template slot-scope="scope">
+                    <el-select allow-create
+                               filterable v-model="scope.row.ywyy" placeholder="请选择">
+                      <el-option
+                        v-for="item in dynamicYwyyForm.ywyy"
+                        :key="item.value"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="*数据类型" width="240px">
+                  <template slot-scope="scope">
+                    <el-select v-model="scope.row.sjlx" placeholder="请选择">
+                      <el-option
+                        v-for="item in zysjqk_sjlx_options"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="数据内容">
+                  <template slot-scope="scope">
+                    <el-input type="textarea" :rows="4"
+                              placeholder='请输入内容'
+                              v-model="scope.row.sjnr"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="保护需求">
+                  <template slot-scope="scope">
+                    <el-input type="textarea" :rows="4" placeholder='请输入内容'
+                              v-model="scope.row.bhxq"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column align="left" header-align="center" label="*存储加密" width="100px">
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="scope.row.ccjm">
+                      <div>
+                        <el-radio label="1">国密</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="2">非国密</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="3">未加密</el-radio>
+                      </div>
+                    </el-radio-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="数据量" width="100px">
+                  <template slot-scope="scope">
+                    <el-input v-model="scope.row.sjl" placeholder="请输入"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column align="left" header-align="center" label="*传输加密" width="100px">
+                  <template slot-scope="scope">
+                    <el-radio-group v-model="scope.row.csjm">
+                      <div>
+                        <el-radio label="1">不涉及</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="2">国密</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="3">非国密</el-radio>
+                      </div>
+                      <br>
+                      <div>
+                        <el-radio label="4">未加密</el-radio>
+                      </div>
+                    </el-radio-group>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="流量" width="100px">
+                  <template slot-scope="scope">
+                    <el-input v-model="scope.row.ll" placeholder="请输入"></el-input>
+                  </template>
+                </el-table-column>
+                <el-table-column align="center" label="操作" width="80px">
+                  <template slot-scope="scope">
+                    <el-button type="danger" size="mini" @click="yyhsj_ywyy_zysjqkDelete(scope.$index)">删除</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-row>
+          </el-form>
+          <div>
+            <br>
+            <el-alert title="请注意业务应用的对应关系" type="warning"
+                      description="请保证系统用户情况中的【业务应用】与应用和数据（业务应用、重要数据）中的【业务应用】保持一致"
+                      show-icon>
+            </el-alert>
+            <br>
+          </div>
         </div>
       </el-tab-pane>
       <el-tab-pane label="产品清单" name="ten">
-        <div>
-          <br>
-          <el-alert title="设置数量为9999表示按需（可手动输入）" type="info"
-                    show-icon>
-          </el-alert>
-          <br>
+        <div style="margin-left:30px; margin-right:30px">
+          <div>
+            <br>
+            <el-alert title="设置数量为9999表示按需（可手动输入）" type="info"
+                      show-icon>
+            </el-alert>
+            <br>
+          </div>
+          <el-table border :data="sbqd">
+            <el-table-column label="序号" align="center" type="index" width="50"/>
+            <el-table-column label="设备名称" align="center" prop="name"/>
+            <el-table-column label="基本型号" align="center" prop="jbxh"/>
+            <el-table-column label="类别" width="120px" align="center" prop="lb"/>
+            <el-table-column label="数量" width="180px" align="center" prop="num">
+              <template slot-scope="scope">
+                <el-input-number
+                  v-model="scope.row.num"
+                  size="small"
+                />
+              </template>
+            </el-table-column>
+            <el-table-column label="备注" width="180px" align="center" prop="num">
+              <template slot-scope="scope">
+                <el-input v-model="scope.row.remark" placeholder="备注"></el-input>
+              </template>
+            </el-table-column>
+          </el-table>
         </div>
-        <el-table border :data="sbqd">
-          <el-table-column label="序号" align="center" type="index" width="50"/>
-          <el-table-column label="设备名称" align="center" prop="name"/>
-          <el-table-column label="基本型号" align="center" prop="jbxh"/>
-          <el-table-column label="类别" width="120px" align="center" prop="lb"/>
-          <el-table-column label="数量" width="180px" align="center" prop="num">
-            <template slot-scope="scope">
-              <el-input-number
-                v-model="scope.row.num"
-                size="small"
-              />
-            </template>
-          </el-table-column>
-          <el-table-column label="备注" width="180px" align="center" prop="num">
-            <template slot-scope="scope">
-              <el-input v-model="scope.row.remark" placeholder="备注"></el-input>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-tab-pane>
-    </el-tabs>
+  </el-tab-pane>
+  </el-tabs>
   </div>
 </template>
 

@@ -15,8 +15,16 @@
       <el-menu-item index="5">评分系统</el-menu-item>
     </el-menu>
 
-    评分系统 {{xmmc}}
-
+    评分系统 {{xmmc}}<br>
+    评分系统使用流程：<br>
+    <div align="middle">
+      <img :src="require('@/assets/pf.png')">
+    <br><br>
+    <div>
+      <el-button type="primary">下载初始评分excel</el-button>
+      <el-button type="primary">上传修改后的评分excel</el-button>
+    </div>
+    </div>
   </div>
 
 </template>

@@ -12,6 +12,7 @@
         placeholder="账号"
       ></el-input>
     </el-form-item>
+    <br>
     <el-form-item>
       <el-input
         type="password"
@@ -20,6 +21,7 @@
         placeholder="密码"
       ></el-input>
     </el-form-item>
+    <br>
     <el-form-item style="width: 100%">
       <el-button
         type="primary"
@@ -27,8 +29,9 @@
         @click="login"
       >登录
       </el-button
-      >
+      ><br>
     </el-form-item>
+    <br>
   </el-form>
   </body>
 </template>

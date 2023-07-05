@@ -14,9 +14,15 @@
       <el-menu-item index="4">文件管理</el-menu-item>
       <el-menu-item index="5">评分系统</el-menu-item>
     </el-menu>
-    {{xmmc}}
+
+    <div>
+      <h2>{{xmmc}}--文件下载列表</h2>
+
+    </div>
+
+
     <div id="app">
-      <h2>文件上传</h2>
+      <h2>{{xmmc}}--文件上传</h2>
       <el-upload
         class="upload-demo"
         drag
