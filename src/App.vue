@@ -9,3 +9,8 @@ export default {
   name: 'App'
 }
 </script>
+
+<style>
+
+.el-table--border th.gutter:last-of-type { display: block!important; width: 17px!important; }
+</style>

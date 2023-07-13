@@ -25,6 +25,10 @@ export default new Router({
         requireAuth: true
       },
       component: () => import('@/components/choose')
+    }, {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/components/login')
     },{
       path: '/basicinfo',
       name: 'basicinfo',
@@ -33,18 +37,33 @@ export default new Router({
       },
       component: () => import('@/components/basicinfo')
     },{
-      path: '/login',
-      name: 'login',
-      component: () => import('@/components/login')
+      path: '/usermanagement',
+      name: 'usermanagement',
+      meta: {
+        requireAuth: true
+      },
+      component: () => import('@/components/usermanagement')
+    }, {
+      path: '/statistics',
+      name: 'statistics',
+      meta: {
+        requireAuth: true
+      },
+      component: () => import('@/components/statistics')
     },{
       path: '/upload',
       name: 'upload',
+      meta: {
+        requireAuth: true
+      },
       component: () => import('@/components/fileUpload')
     },{
       path: '/pingfen',
       name: 'pingfen',
+      meta: {
+        requireAuth: true
+      },
       component: () => import('@/components/pingfen')
-    },
-
-  ],
+    }
+  ]
 })

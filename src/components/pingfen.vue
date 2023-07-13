@@ -15,8 +15,16 @@
       <el-menu-item index="5">评分系统</el-menu-item>
     </el-menu>
 
-    评分系统 {{xmmc}}
-
+    评分系统 {{xmmc}}<br>
+    评分系统使用流程：<br>
+    <div align="middle">
+      <img :src="require('@/assets/pf.png')">
+    <br><br>
+    <div>
+      <el-button type="primary" @click ="culateScore">下载初始评分excel</el-button>
+      <el-button type="primary" @click ="updateScore">上传修改后的评分excel</el-button>
+    </div>
+    </div>
   </div>
 
 </template>
@@ -29,7 +37,6 @@ export default {
     return {
       activeIndex:'5',
       xmmc:this.$route.params.xmmc,
-
     }
   },
 
@@ -51,6 +58,33 @@ export default {
         this.$message.error('上传文件大小不能超过 20MB!');
       }
       return (isJPG || isPNG || isPDF || isXLSX || isXLS || isDOC || isDOCX) && isLt20M;
+    },
+
+    culateScore(){
+      let that = this
+      this.loading = true
+      axios.post('/api/culate', {
+        xmmc:this.xmmc
+      }, {
+        responseType: 'blob',
+        headers:{
+          'token': window.sessionStorage['token']
+        }
+      }).then(function (response) {
+        that.loading = false
+        var aTag = document.createElement('a')
+        let tmp = response.data
+        aTag.download = that.xmmc + '评分表.xlsx'
+        aTag.href = URL.createObjectURL(tmp)
+        aTag.click()
+      }).catch(function (error) {
+        that.loading = false
+        alert("通信错误，请联系管理员")
+      })
+    },
+
+    updateScore(){
+
     },
 
     handleSuccess(result) {

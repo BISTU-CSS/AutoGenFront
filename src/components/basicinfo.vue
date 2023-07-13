@@ -143,7 +143,7 @@ export default {
           zjsb: '1'
         }],    //wlhhj
         sys_wlhtx: [
-          {type: '1', txzt: '1', sfrz: ['2'], zysj: '1', sl: '', sm: '', cpdx: '互联网VPN客户端与运维SSL VPN之间的运维通信信道'},
+          {type: '1', txzt: '1', sfrz: ['2'], zysj: '1', sl: '', sm: '', cpdx: '互联网运维人员PC端与系统之间的运维通信信道'},
           {type: '1', txzt: '2', sfrz: ['2'], zysj: '1', sl: '', sm: '', cpdx: '互联网PC浏览器与系统之间的通信信道'},
           {type: '1', txzt: '3', sfrz: ['2'], zysj: '1', sl: '', sm: '', cpdx: '互联网PC客户端与系统之间的通信信道'},
           {type: '1', txzt: '4', sfrz: ['2'], zysj: '1', sl: '', sm: '', cpdx: '互联网移动端APP与系统之间的通信信道'},
@@ -166,18 +166,18 @@ export default {
         sys_zysj: [
           {
             ywyy: '', sjlx: '1', sjnr: '用户名口令、单个用户单位时间内的登录次数和失败次数、单个IP地址单位时间内的登录次数和失败次数、密保问题',
-            bhxq: '机密性、完整性', ccjm: '3', sjl: '', csjm: '4', ll: ''
+            bhxq: '传输/存储机密性、传输/存储完整性', ccjm: '3', sjl: '', csjm: '4', ll: ''
           },
-          {ywyy: '', sjlx: '2', sjnr: '', ccjm: '3', bhxq: '机密性、完整性', sjl: '', csjm: '4', ll: ''},
+          {ywyy: '', sjlx: '2', sjnr: '', ccjm: '3', bhxq: '传输/存储完整性', sjl: '', csjm: '4', ll: ''},
           {
             ywyy: '', sjlx: '3', sjnr: '认证登录日志、配置操作日志、受终端操作日志、管理平台操作日志、涉密数据操作日志、外发数据操作日志',
-            bhxq: '完整性', ccjm: '3', sjl: '', csjm: '4', ll: ''
+            bhxq: '传输/存储完整性', ccjm: '3', sjl: '', csjm: '4', ll: ''
           },
           {
             ywyy: '',
             sjlx: '4',
             sjnr: '身份证、手机号、银行账户、存款信息、以往病例',
-            bhxq: '机密性、完整性',
+            bhxq: '传输/存储机密性、传输/存储完整性',
             ccjm: '3',
             sjl: '',
             csjm: '4',
@@ -189,7 +189,7 @@ export default {
             sjlx: '6',
             sjnr: '安全策略、资源访问控制列表、数据库安全策略、用户权限列表',
             ccjm: '3',
-            bhxq: '完整性',
+            bhxq: '传输/存储完整性',
             sjl: '',
             csjm: '4',
             ll: ''
@@ -316,11 +316,11 @@ export default {
           remark: ''
         }, {
           id: 18,
-          name: '国密SSL证书证书',
+          name: '国密SSL证书',
           jbxh: 'GDCA-DV-STAR-SSL',
           lb: '软件',
-          num: 0,
-          remark: ''
+          num: 9999,
+          remark: '站点证书'
         }, {
           id: 19,
           name: '云服务器密码机',
