@@ -1261,7 +1261,7 @@ export default {
         aTag.click()
       }).catch(function (error) {
         that.loading = false
-        alert("lksadjf")
+        alert("通信错误，请联系管理员")
       })
     },
     dynamicYwyyChange (index, value) {
@@ -1545,7 +1545,7 @@ export default {
         aTag.click()
       }).catch(function (error) {
         that.loading = false
-        alert("lksadjf")
+        alert("系统错误，请联系管理员")
       })
     },
     changeRZYSbyYSBS (index) {

@@ -4,12 +4,22 @@
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal"
                background-color="#141016" text-color="#fff"
                active-text-color="#ffd04b" margin="0" padding="0">
-        <el-col :span="21">
+        <el-col :span="19">
           <el-menu-item index="1">项目主页</el-menu-item>
         </el-col>
-        <el-col :span="3">
-          <el-menu-item index="2" disabled v-text="yonghu"></el-menu-item>
-        </el-col>
+        <el-row>
+          <el-col :span="2">
+            <div>
+              <el-menu-item index="2" disabled v-text="yonghu" align="center"></el-menu-item>
+            </div>
+          </el-col>
+          <el-col :span="1" >
+            <div style="margin-top: 8px">
+              <el-button type="text" icon="el-icon-user-solid" round @click="exit">退出登录</el-button>
+            </div>
+          </el-col>
+        </el-row>
+
       </el-menu>
     </div>
     <el-row class="tac">
@@ -128,6 +138,12 @@ export default {
       })
     },
 
+    exit () {
+      let that = this
+      alert("退出登录")
+      that.$router.push({path: '/login'})
+        },
+
     addque(){     //创建项目仓库
       //this.$router.push({path: '/addque'})    //换成弹窗
       let that = this
@@ -143,8 +159,8 @@ export default {
         //传递JSON
         axios.post('/api/createQuestionnaire', {
             xmmc: value,
-            cjr: this.yonghu,        //获取姓名
-            //zdls: this.zdls,      //暂无
+            cjr: that.$store.state.user.userName,        //获取姓名
+            zdls: that.$store.state.user.teacher,      //暂无
             xmsm: this.xmsm       //暂无
           }, {
             headers: {
@@ -191,6 +207,8 @@ export default {
   mounted: function () {
     let that = this
     // axios.get('/api/getQuestionnaireList').
+
+
     axios({
       methods: 'get',
       url: '/api/getQuestionnaireList',
@@ -199,8 +217,10 @@ export default {
       }
     }).then(function (response) {
       if (response.data.retcode == 'ok') {
+        that.yonghu = that.$store.state.user.userName
         // var jsonData = JSON.stringify(response.data)
         // alert(jsonData)
+
         that.tableData = response.data.data
       // } else if (response.data.retcode == '用户未登录，请先登录') {
       //   alert('用户未登录，请先登录')

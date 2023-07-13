@@ -2,7 +2,6 @@
   <body id="login-page">
   <el-form class="login-container" label-position="left" label-width="0px">
     <h3 class="login_title">系统登录</h3>
-    用户名：test 密码：111111
     <el-form-item>
       <br>
       <el-input
@@ -23,13 +22,24 @@
     </el-form-item>
     <br>
     <el-form-item style="width: 100%">
-      <el-button
-        type="primary"
-        style="width: 100%;  border: none"
-        @click="login"
-      >登录
-      </el-button
-      ><br>
+      <el-row>
+        <el-col>
+          <el-button
+            type="primary"
+            style="width: 100%;  border: none"
+            @click="login(1)"
+          >登录
+          </el-button>
+        </el-col>
+        <el-col>
+          <el-button
+            type="primary"
+            style="width: 100%;  border: none"
+            @click="login(2)"
+          >管理员登录
+          </el-button>
+        </el-col>
+      </el-row>
     </el-form-item>
     <br>
   </el-form>
@@ -51,7 +61,7 @@ export default {
     }
   },
   methods: {
-    login () {
+    login (type) {
       var _this = this
       userLogin({
         loginName: this.loginForm.loginName,
@@ -68,7 +78,15 @@ export default {
           _this.$store.commit('SET_USER', user)
           console.log(_this.$store.state.token)
           var path = this.$route.query.redirect
-          this.$router.replace({path: path === '/' || path === undefined ? '/choose' : path})
+          if (type === 1) {
+            this.$router.replace({path: path === '/' || path === undefined ? '/choose' : path})
+          } else if (type === 2) {
+            if (_this.$store.state.user.authority === '管理员') {
+              this.$router.push({path: '/usermanagement'})
+            } else {
+              alert('无管理员权限！')
+            }
+          }
         }
       })
     },

@@ -157,6 +157,10 @@ export default {
   methods:{
     load(){
       let that = this
+      if(that.$store.state.user.authority === '普通用户'){
+        alert("无管理员权限！")
+        this.$router.push({path: '/choose'})
+      }
       axios.get("/api/user/page",{
         params:{
           pageNum:this.pageNum,
