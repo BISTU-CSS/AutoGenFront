@@ -17,23 +17,53 @@
 
     <div>
       <h2>{{xmmc}}--文件下载列表</h2>
+    <div>
+      <template>
+        <el-table
+          :data="tableData"
+          style="width: 100%">
+          <el-table-column
+            prop="date"
+            label="日期"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="name"
+            label="文件名"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            label="操作"
+            width="100">
+            <template slot-scope="scope">
+              <el-button @click="handleClick(scope.row)" type="text" size="small">下载</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </template>
+
 
     </div>
-
+    </div>
 
     <div id="app">
       <h2>{{xmmc}}--文件上传</h2>
-      <el-upload
-        class="upload-demo"
-        drag
-        action="api/upload"
-        multiple
-        :on-success="handleSuccess"
-        :before-upload="beforeAvatarUpload">
-        <i class="el-icon-upload"></i>
-        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-        <div class="el-upload__tip" slot="tip">只能上传jpg/png/txt/pdf/excel/word文件，且不超过20MB</div>
-      </el-upload>
+
+      <div>
+        <el-upload
+          ref="videoUpload"
+          action=""
+          multiple
+          :auto-upload="false"
+          :on-change="uploadHOCK"
+          :before-upload="beforeAvatarUpload"
+        >
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          <div class="el-upload__tip" slot="tip">只能上传jpg/png/txt/pdf/excel/word文件，且不超过20MB</div>
+        </el-upload>
+      </div>
+
     </div>
   </div>
 
@@ -47,7 +77,6 @@ export default {
     return {
       activeIndex:'4',
       xmmc:this.$route.params.xmmc,
-
 
     }
   },
@@ -72,9 +101,37 @@ export default {
       return (isJPG || isPNG || isPDF || isXLSX || isXLS || isDOC || isDOCX) && isLt20M;
     },
 
-    handleSuccess(result) {
-      alert("上传成功")
-    },
+    async uploadHOCK(file) {
+      console.log(file)
+      console.log(this.xmmc)
+      var form_ = new FormData();
+      form_.append('file', file.raw)
+      form_.append('xmmc', this.xmmc)
+      axios.post(
+        '/api/upload',
+        form_
+        , {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            'token': window.sessionStorage['token']
+          }
+        }
+      ).then(function (response) {
+        if(response.data.retcode = 'ok'){
+          alert('上传成功!')
+        }else{
+          alert('上传失败！')
+        }
+      }).catch(function (error) {
+        alert('通信错误，请联系管理员')
+        console.error(error)
+      })
+
+
+
+
+  },
+
 
     handleSelect (key, keyPath) {
       if (key == 1) {     //返回主页
@@ -90,12 +147,15 @@ export default {
             }
           }
         ).then(function (response) {
-          that.$router.push({
+
+          that.$router.push(
+            {
             name: 'questionnaire', params: {
               sys_name: that.xmmc,
               data: response.data.data
             }
           })
+
         }).catch(function (error) {
           alert('通信错误，请联系管理员')
           console.error(error)
@@ -119,11 +179,40 @@ export default {
       this.loading = true
 
     }
+
+
   },
 
   mounted: function () {
-    // alert(this.xmmc)
+    //alert(this.xmmc)
     // 用xmmc获取文件系统的信息
+    let that = this
+    // axios.get('/api/getQuestionnaireList').
+
+
+    axios({
+      methods: 'get',
+      url: '/api/getQuestionnaireList',
+      headers: {
+        'token': window.sessionStorage['token']
+      }
+    }).then(function (response) {
+      if (response.data.retcode == 'ok') {
+        that.yonghu = that.$store.state.user.userName
+        // var jsonData = JSON.stringify(response.data)
+        // alert(jsonData)
+
+        that.tableData = response.data.data
+        // } else if (response.data.retcode == '用户未登录，请先登录') {
+        //   alert('用户未登录，请先登录')
+      } else {
+        alert('系统错误，请联系管理员')
+      }
+    }).catch(function (error) {
+      alert('get通信错误，请联系管理员')
+      console.error(error)
+
+    })
   }
 }
 </script>
