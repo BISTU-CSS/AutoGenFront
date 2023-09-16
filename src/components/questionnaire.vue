@@ -57,18 +57,23 @@
           <br>
           <el-form-item label="*确定项目类型">
             <el-radio-group v-model="sys_xmlx">
-              <el-radio label="1">单系统模式:建设的密码资源服务于单个信息系统</el-radio>
+              <el-radio label="1">非云平台</el-radio>
+              <br>
+              <el-radio label="2">云平台过密评</el-radio>
+              <br>
+              <el-radio label="3">云租户过密评</el-radio>
+              <!-- <el-radio label="1">单系统模式:建设的密码资源服务于单个信息系统</el-radio>
               <br>
               <el-radio label="2">多系统模式:共享建设的密码资源,同时支撑多个信息系统,一般一个主体建设;</el-radio>
               <br>
               <el-radio label="3">云租户模式:为云平台建设云密码资源池,为云租户系统动态分配密码资源;</el-radio>
               <br>
-              <el-radio label="4">云租户+云平台模式:为云平台建设云密码资源池,为云租户系统动态分配密码资源，同时为云平台建设密码资源，保障云平台自身过密评。</el-radio>
+              <el-radio label="4">云租户+云平台模式:为云平台建设云密码资源池,为云租户系统动态分配密码资源，同时为云平台建设密码资源，保障云平台自身过密评。</el-radio> -->
             </el-radio-group>
           </el-form-item>
           <br>
           <br>
-          <el-row>
+          <!-- <el-row>
             <el-col :span="5">
               <el-form-item label="*系统架构">
                 <el-radio-group v-model="sys_xtjg">
@@ -80,9 +85,9 @@
             </el-col>
           </el-row>
           <br>
-          <br>
+          <br> -->
           <el-row>
-            <el-col :span="5">
+            <!-- <el-col :span="5">
               <el-form-item label="*系统建设">
                 <el-radio-group v-model="sys_xtjs">
                   <el-radio label="1">未建设</el-radio>
@@ -92,19 +97,19 @@
                   <el-radio label="3">已上线</el-radio>
                 </el-radio-group>
               </el-form-item>
-            </el-col>
+            </el-col> -->
             <el-col :span="5">
               <el-form-item label="*等保级别">
                 <el-radio-group v-model="sys_dbjb">
                   <el-radio label="1">二级</el-radio>
                   <br>
                   <el-radio label="2">三级</el-radio>
-                  <br>
-                  <el-radio label="3">四级</el-radio>
+                  <!-- <br>
+                  <el-radio label="3">四级</el-radio> -->
                 </el-radio-group>
               </el-form-item>
             </el-col>
-            <el-col :span="5">
+            <!-- <el-col :span="5">
               <el-form-item label="*密评首次">
                 <el-radio-group v-model="sys_mpsc">
                   <el-radio label="1">首次</el-radio>
@@ -115,8 +120,8 @@
                   <br>
                 </el-radio-group>
               </el-form-item>
-            </el-col>
-            <el-col :span="5">
+            </el-col> -->
+            <!-- <el-col :span="5">
               <el-form-item label="*密码制度">
                 <el-radio-group v-model="sys_mmzd">
                   <el-radio label="1">未建设</el-radio>
@@ -136,9 +141,9 @@
                   <el-radio label="2">不在云上</el-radio>
                 </el-radio-group>
               </el-form-item>
-            </el-col>
+            </el-col> -->
 
-            <el-col :span="5">
+            <!-- <el-col :span="5">
               <el-form-item label="若在云上">
                 <el-radio-group v-model="sys_rzys" :disabled="sys_rzys_disableb">
                   <el-radio label="1">云平台已过密评</el-radio>
@@ -164,9 +169,9 @@
                   <el-checkbox label="3">微信小程序</el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
-            </el-col>
+            </el-col> -->
           </el-row>
-          <el-form-item label="等保定级时间">
+          <!-- <el-form-item label="等保定级时间">
             <el-input v-model="sys_dbsj" placeholder="请输入完成等保定级时间" style="width: 20%"></el-input>
           </el-form-item>
           <el-form-item label="定级预备编号">
@@ -180,7 +185,7 @@
           </el-form-item>
           <el-form-item label="上线时间">
             <el-input v-model="sys_sxsj" placeholder="请输入系统上线时间" style="width: 20%"></el-input>
-          </el-form-item>
+          </el-form-item> -->
           <br>
           <el-form-item
             v-for="(i, index) in dynamicYwyyForm.ywyy"
@@ -310,7 +315,7 @@
                   <el-input v-model="scope.row.jfmc" placeholder="请输入机房名称"></el-input>
                 </template>
               </el-table-column>
-              <el-table-column align="center" label="*机房类型" width="300px">
+              <!-- <el-table-column align="center" label="*机房类型" width="300px">
                 <template slot-scope="scope">
                   <el-radio-group v-model="scope.row.jflx">
                     <el-radio label="1">新机房</el-radio>
@@ -318,7 +323,7 @@
                     <el-radio label="3">租机房</el-radio>
                   </el-radio-group>
                 </template>
-              </el-table-column>
+              </el-table-column> -->
               <el-table-column align="left" header-align="center" label="*门禁" width="300px">
                 <template slot-scope="scope">
                   <el-radio-group v-model="scope.row.mj">
@@ -367,7 +372,7 @@
                   </el-radio-group>
                 </template>
               </el-table-column>
-              <el-table-column align="left" header-align="center" label="*是否允许增加设备" width="120px">
+              <!-- <el-table-column align="left" header-align="center" label="*是否允许增加设备" width="120px">
                 <template slot-scope="scope">
                   <el-radio-group v-model="scope.row.zjsb">
                     <div>
@@ -379,7 +384,7 @@
                     </div>
                   </el-radio-group>
                 </template>
-              </el-table-column>
+              </el-table-column> -->
               <el-table-column align="center" label="操作" width="80px">
                 <template slot-scope="scope">
                   <el-button type="danger" size="mini" @click="wlhhjDelete(scope.$index)">删除</el-button>
@@ -454,7 +459,7 @@
                   </el-checkbox-group>
                 </template>
               </el-table-column>
-              <el-table-column align="center" label="*是否涉及重要数据传输" width="80px">
+              <!-- <el-table-column align="center" label="*是否涉及重要数据传输" width="80px">
                 <template slot-scope="scope">
                   <el-radio-group v-model="scope.row.zysj">
                     <div>
@@ -466,13 +471,13 @@
                     </div>
                   </el-radio-group>
                 </template>
-              </el-table-column>
-              <el-table-column align="center" label="数量/流量" width="120px">
+              </el-table-column> -->
+              <!-- <el-table-column align="center" label="数量/流量" width="120px">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.sl" placeholder="请输入"></el-input>
                 </template>
-              </el-table-column>
-              <el-table-column align="center" label="说明" width="160px">
+              </el-table-column> -->
+              <!-- <el-table-column align="center" label="说明" width="160px">
                 <template slot-scope="scope">
                   <el-input
                     type="textarea"
@@ -481,7 +486,7 @@
                     v-model="scope.row.sm">
                   </el-input>
                 </template>
-              </el-table-column>
+              </el-table-column> -->
               <el-table-column align="center" label="操作" width="80px">
                 <template slot-scope="scope">
                   <el-button type="danger" size="mini" @click="wlhtxDelete(scope.$index)">删除</el-button>
@@ -646,7 +651,7 @@
                     <el-input-number v-model="scope.row.sl" :min="1" :max="100000" size="small"></el-input-number>
                   </template>
                 </el-table-column>
-                <el-table-column align="left" header-align="center" label="*是否支持国密算法" width="120px">
+                <!-- <el-table-column align="left" header-align="center" label="*是否支持国密算法" width="120px">
                   <template slot-scope="scope">
                     <el-radio-group v-model="scope.row.gmsf">
                       <el-col :span="20">
@@ -657,7 +662,7 @@
                       </el-col>
                     </el-radio-group>
                   </template>
-                </el-table-column>
+                </el-table-column> -->
                 <el-table-column align="left" header-align="center" label="*是否有商密证书" width="120px">
                   <template slot-scope="scope">
                     <el-radio-group v-model="scope.row.smzs">
@@ -670,7 +675,7 @@
                     </el-radio-group>
                   </template>
                 </el-table-column>
-                <el-table-column align="left" header-align="center" label="*是否支持远程运维" width="120px">
+                <!-- <el-table-column align="left" header-align="center" label="*是否支持远程运维" width="120px">
                   <template slot-scope="scope">
                     <el-radio-group v-model="scope.row.ycyw">
                       <el-col :span="20">
@@ -681,7 +686,7 @@
                       </el-col>
                     </el-radio-group>
                   </template>
-                </el-table-column>
+                </el-table-column> -->
                 <el-table-column align="left" header-align="center" label="*运维人身份认证(多选)">
                   <template slot-scope="scope">
                     <el-checkbox-group v-model="scope.row.sfrz">
@@ -731,7 +736,7 @@
             </el-row>
             <el-row>
               <el-table :data="yyhsj_ywyy_zysj" border :header-cell-style="{background:'#b8bbbf',color:'#606266'}">
-                <el-table-column align="center" label="*业务应用" width="230px">
+                <el-table-column align="center" label="*业务应用" width="flexColumnWidth('string',tableData)">
                   <template slot-scope="scope">
                     <el-select allow-create
                                filterable v-model="scope.row.ywyy" placeholder="请选择">
@@ -743,13 +748,13 @@
                     </el-select>
                   </template>
                 </el-table-column>
-                <el-table-column align="center" label="功能描述" width="250px">
+                <el-table-column align="center" label="功能描述" width="flexColumnWidth('string',tableData)">
                   <template slot-scope="scope">
                     <el-input type="textarea" :rows="4" placeholder="请输入内容"
                               v-model="scope.row.gnms"></el-input>
                   </template>
-                </el-table-column>
-                <el-table-column align="left" header-align="center" label="*对外服务方式" width="100px">
+                <!-- </el-table-column> -->
+                <!-- <el-table-column align="left" header-align="center" label="*对外服务方式" width="100px">
                   <template slot-scope="scope">
                     <el-radio-group v-model="scope.row.fwfs">
                       <div>
@@ -764,9 +769,9 @@
                         <el-radio label="3">其它</el-radio>
                       </div>
                     </el-radio-group>
-                  </template>
+                  </template> -->
                 </el-table-column>
-                <el-table-column align="left" header-align="center" label="*操作需要不可否认性" width="160px">
+                <el-table-column align="left" header-align="center" label="*操作需要不可否认性" width="flexColumnWidth('string',tableData)">
                   <template slot-scope="scope">
                     <el-radio-group v-model="scope.row.bkfr">
                       <div>
@@ -782,13 +787,13 @@
                       </div>
                     </el-radio-group>
                   </template>
-                </el-table-column>
+                <!-- </el-table-column>
                 <el-table-column align="center" label="操作需要不可否认性的具体情况">
                   <template slot-scope="scope">
                     <el-input type="textarea" :rows="4" placeholder="请输入内容"
                               v-model="scope.row.jtqk1"></el-input>
-                  </template>
-                </el-table-column>
+                  </template> -->
+                <!-- </el-table-column>
                 <el-table-column align="left" header-align="center" label="*需要电子签名&电子印章" width="160px">
                   <template slot-scope="scope">
                     <el-radio-group v-model="scope.row.dzqm">
@@ -804,15 +809,15 @@
                         <el-radio label="3">有需求&已做</el-radio>
                       </div>
                     </el-radio-group>
-                  </template>
-                </el-table-column>
-                <el-table-column align="center" label="需要电子签名&电子印章的具体情况">
+                  </template> -->
+                <!-- </el-table-column> -->
+                <!-- <el-table-column align="center" label="需要电子签名&电子印章的具体情况">
                   <template slot-scope="scope">
                     <el-input type="textarea" :rows="4" placeholder="请输入内容"
                               v-model="scope.row.jtqk2"></el-input>
-                  </template>
+                  </template> -->
                 </el-table-column>
-                <el-table-column align="center" label="操作" width="80px">
+                <el-table-column align="center" label="操作" width="flexColumnWidth('string',tableData)">
                   <template slot-scope="scope">
                     <el-button type="danger" size="mini" @click="yyhsj_ywyy_zysjDelete(scope.$index)">删除</el-button>
                   </template>
@@ -897,11 +902,11 @@
                     </el-radio-group>
                   </template>
                 </el-table-column>
-                <el-table-column align="center" label="数据量" width="100px">
+                <!-- <el-table-column align="center" label="数据量" width="100px">
                   <template slot-scope="scope">
                     <el-input v-model="scope.row.sjl" placeholder="请输入"></el-input>
                   </template>
-                </el-table-column>
+                </el-table-column> -->
                 <el-table-column align="left" header-align="center" label="*传输加密" width="100px">
                   <template slot-scope="scope">
                     <el-radio-group v-model="scope.row.csjm">
@@ -923,11 +928,11 @@
                     </el-radio-group>
                   </template>
                 </el-table-column>
-                <el-table-column align="center" label="流量" width="100px">
+                <!-- <el-table-column align="center" label="流量" width="100px">
                   <template slot-scope="scope">
                     <el-input v-model="scope.row.ll" placeholder="请输入"></el-input>
                   </template>
-                </el-table-column>
+                </el-table-column> -->
                 <el-table-column align="center" label="操作" width="80px">
                   <template slot-scope="scope">
                     <el-button type="danger" size="mini" @click="yyhsj_ywyy_zysjqkDelete(scope.$index)">删除</el-button>
@@ -954,6 +959,14 @@
                       show-icon>
             </el-alert>
             <br>
+            <template>
+            <el-alert
+              title="产品清单版本日期：2023.7.17"
+              type="warning"
+              effect="dark">
+            </el-alert>
+            
+          </template>
           </div>
           <el-table border :data="sbqd">
             <el-table-column label="序号" align="center" type="index" width="50"/>
@@ -1046,6 +1059,9 @@ export default {
       }, {
         value: '4',
         label: '微信小程序'
+      },{
+        value: '5',
+        label: 'SSH后台登录'
       }],
       xtyhqk_sfrz_options: [{
         value: '1',
