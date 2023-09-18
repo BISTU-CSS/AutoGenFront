@@ -7,7 +7,7 @@ import store from '@/store'
 const service = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API, // 本地测试用
   // baseURL: "http://172.22.1.200:8084/api", // 远程部署用
-  baseURL: "http://127.0.0.1:8084/api", // 远程部署用
+  baseURL: "http://localhost:8885/api", // 远程部署用
 })
 
 // request 请求拦截
