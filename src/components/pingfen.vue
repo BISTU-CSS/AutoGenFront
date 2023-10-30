@@ -15,14 +15,33 @@
       <el-menu-item index="5">评分系统</el-menu-item>
     </el-menu>
 
-    评分系统 {{xmmc}}<br>
+    项目名称: {{xmmc}}<br>
     评分系统使用流程：<br>
     <div align="middle">
       <img :src="require('@/assets/pf.png')">
     <br><br>
     <div>
       <el-button type="primary" @click ="culateScore">下载初始评分excel</el-button>
-      <el-button type="primary" @click ="updateScore">上传修改后的评分excel</el-button>
+<!--      <el-button type="primary" @click ="updateScore">上传修改后的评分excel</el-button>-->
+      <div id="app">
+        <h2>{{ xmmc }}--上传修改后的评分excel</h2>
+
+        <div>
+          <el-upload
+            ref="videoUpload"
+            action=""
+            multiple
+            :auto-upload="false"
+            :on-change="uploadHOCK"
+            :before-upload="beforeAvatarUpload"
+          >
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+<!--            <div class="el-upload__tip" slot="tip">只能上传jpg/png/txt/pdf/excel/word文件，且不超过20MB</div>-->
+          </el-upload>
+        </div>
+
+      </div>
     </div>
     </div>
   </div>
@@ -51,12 +70,12 @@ export default {
       const isDOCX = file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
       const isDOC = file.type === 'application/msword';
       const isLt20M = file.size / 1024 / 1024 < 20;
-      if (!isJPG && !isPNG && !isPDF && isXLSX && isXLS && isDOC && isDOCX) {
-        this.$message.error('上传文件格式只能是 JPG PNG TXT PDF XLS XLSX DOC DOCX格式!');
-      }
-      if (!isLt20M) {
-        this.$message.error('上传文件大小不能超过 20MB!');
-      }
+      // if (!isJPG && !isPNG && !isPDF && isXLSX && isXLS && isDOC && isDOCX) {
+      //   this.$message.error('上传文件格式只能是 JPG PNG TXT PDF XLS XLSX DOC DOCX格式!');
+      // }
+      // if (!isLt20M) {
+      //   this.$message.error('上传文件大小不能超过 20MB!');
+      // }
       return (isJPG || isPNG || isPDF || isXLSX || isXLS || isDOC || isDOCX) && isLt20M;
     },
 
@@ -83,8 +102,37 @@ export default {
       })
     },
 
-    updateScore(){
-
+    uploadHOCK(file){
+      console.log(file)
+      console.log(this.xmmc)
+      var form_ = new FormData()
+      form_.append('file', file.raw)
+      form_.append('xmmc', this.xmmc)
+      axios.post(
+        '/api/FSdownload',
+        form_
+        , {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'token': window.sessionStorage['token']
+          }
+        }
+      ).then(function (response) {
+        if (response.data.retcode = 'ok') {
+          //alert('上传成功!')
+          alert('物理和环境：'+response.data.data[0]+
+                '网络和通信：'+response.data.data[1]+
+                '设备和计算：'+response.data.data[2]+
+                '应用和数据：'+response.data.data[3]+
+                '总分：'+(response.data.data[0]+response.data.data[1]+response.data.data[2]+response.data.data[3])
+          )
+        } else {
+          alert('上传失败！')
+        }
+      }).catch(function (error) {
+        alert('通信错误，请联系管理员')
+        console.error(error)
+      })
     },
 
     handleSuccess(result) {
