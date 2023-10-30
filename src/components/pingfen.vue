@@ -15,16 +15,19 @@
       <el-menu-item index="5">评分系统</el-menu-item>
     </el-menu>
 
-    项目名称: {{xmmc}}<br>
-    评分系统使用流程：<br>
-    <div align="middle">
-      <img :src="require('@/assets/pf.png')">
-    <br><br>
     <div>
-      <el-button type="primary" @click ="culateScore">下载初始评分excel</el-button>
+    <span class="large-text">项目名称: {{xmmc}}</span><br>
+    </div>
+    
+    <div align="middle">
+    <img :src="require('@/assets/pf.png')" class="resized-image">
+    <div>
+      <i class="down" style="color: rgb(0, 187, 255);">
+      <el-button type="primary" @click ="culateScore" >下载初始评分excel</el-button>
+    </i>
 <!--      <el-button type="primary" @click ="updateScore">上传修改后的评分excel</el-button>-->
       <div id="app">
-        <h2>{{ xmmc }}--上传修改后的评分excel</h2>
+        <!-- <h2>{{ xmmc }}上传修改后的评分excel</h2> -->
 
         <div>
           <el-upload
@@ -35,11 +38,37 @@
             :on-change="uploadHOCK"
             :before-upload="beforeAvatarUpload"
           >
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <i class="el-icon-upload" style="font-size: 80px; color: rgb(0, 187, 255);"></i>
+            <div class="el-upload__text">上传修改后的评分表<em>点击上传</em></div>
 <!--            <div class="el-upload__tip" slot="tip">只能上传jpg/png/txt/pdf/excel/word文件，且不超过20MB</div>-->
           </el-upload>
         </div>
+        
+        <div>
+        <!-- 示例：使用表格展示数据 -->
+        <table class="bordered-table">
+            <thead>
+                <tr>
+                    <th>物理和环境</th>
+                    <th>网络和通信</th>
+                    <th>设备和计算</th>
+                    <th>应用和数据</th>
+                    <th>总分</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ data[0] }}</td>
+                    <td>{{ data[1] }}</td>
+                    <td>{{ data[2] }}</td>
+                    <td>{{ data[3] }}</td>
+                    <td>{{ total }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+   
+        
 
       </div>
     </div>
@@ -47,6 +76,30 @@
   </div>
 
 </template>
+<style scoped>
+.large-text {
+    font-size: 24px;  /* 或者您想要的任何其他大小 */
+}
+.resized-image {
+    width: 33%;  /* 图片将占据其容器宽度的50% */
+}
+.bordered-table {
+    border-collapse: collapse;  /* 使边框合并 */
+    width: 100%;  /* 表格宽度 */
+}
+
+.bordered-table th, .bordered-table td {
+    border: 1px solid black;  /* 单元格边框 */
+    padding: 8px;  /* 单元格内边距 */
+    text-align: left;  /* 文本左对齐 */
+}
+
+.bordered-table th {
+    background-color: #f2f2f2;  /* 表头背景颜色 */
+}
+</style>
+
+
 
 <script>
 import axios from 'axios'
@@ -56,6 +109,8 @@ export default {
     return {
       activeIndex:'5',
       xmmc:this.$route.params.xmmc,
+      data:[],
+      total: 0,
     }
   },
 
@@ -108,6 +163,7 @@ export default {
       var form_ = new FormData()
       form_.append('file', file.raw)
       form_.append('xmmc', this.xmmc)
+      let self = this;
       axios.post(
         '/api/FSdownload',
         form_
@@ -119,13 +175,10 @@ export default {
         }
       ).then(function (response) {
         if (response.data.retcode = 'ok') {
-          //alert('上传成功!')
-          alert('物理和环境：'+response.data.data[0]+
-                '网络和通信：'+response.data.data[1]+
-                '设备和计算：'+response.data.data[2]+
-                '应用和数据：'+response.data.data[3]+
-                '总分：'+(response.data.data[0]+response.data.data[1]+response.data.data[2]+response.data.data[3])
-          )
+           alert('上传成功!')
+          self.data = response.data.data;
+          self.total = self.data.reduce((acc, curr) => acc + curr, 0);
+
         } else {
           alert('上传失败！')
         }
