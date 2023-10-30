@@ -96,8 +96,8 @@
                 <el-tooltip class="item" effect="dark" content="打包下载" placement="top">
                   <i class="el-icon-download" style="font-size: 20px; cursor: pointer;"></i>
                 </el-tooltip>&nbsp;
-                <el-tooltip class="item" effect="dark" content="添加标签" placement="top">
-                  <i class="el-icon-collection-tag" style="font-size: 20px; cursor: pointer;"></i>
+                <el-tooltip class="item" effect="dark" content="添加标签" placement="top" disabled="disabled">
+                  <i class="el-icon-collection-tag" style="font-size: 20px; cursor: pointer;" ></i>
                 </el-tooltip>&nbsp;
                 <el-tooltip class="item" effect="dark" content="归档/移除归档" placement="top">
                   <i class="el-icon-receiving" style="font-size: 20px; cursor: pointer;"></i>
@@ -145,7 +145,7 @@ export default {
         },
 
     addque(){     //创建项目仓库
-      //this.$router.push({path: '/addque'})    //换成弹窗
+
       let that = this
 
       this.$prompt('请输入项目名称', '新增项目', {

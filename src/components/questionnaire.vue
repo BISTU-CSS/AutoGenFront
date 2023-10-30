@@ -24,7 +24,6 @@
       &nbsp;&nbsp;<el-button type="success" @click="saveChoose">保存表单</el-button>
       &nbsp;<el-button @click="submit" type="primary">生成方案</el-button>
       &nbsp;<el-button @click="generateSBQD" type="primary">生成设备清单</el-button>
-      &nbsp;<el-button @click="xmpf" type="danger">项目评分</el-button>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 表单中*号为必填项目
     </el-form-item>
   </el-form>
@@ -1571,23 +1570,6 @@ export default {
         this.sys_rzys_disableb = true
       }
       this.sys_rzys = ''
-    },
-    xmpf () {
-      let that = this
-      axios.get('/api/getScore').then(function (response) {
-        //后端接口还没写
-        if (response.data.retcode == 'ok') {
-          that.score = response.data.data
-          that.$alert(that.score, '方案估分', {
-            confirmButtonText: '确定',
-          })
-        } else {
-          alert('系统错误，请联系管理员')
-        }
-      }).catch(function (error) {
-        // alert('通信错误，请联系管理员')
-        // console.error(error)
-      })
     }
   },
   mounted: function () {
