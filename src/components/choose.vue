@@ -131,7 +131,8 @@ export default {
     handleClick (row) {
       let that = this
       that.$router.push({
-        name: 'basicinfo', params: {
+        name: 'basicinfo',
+        params: {
           storage_name: row.xmmc,
           cjr : row.cjr
         }
@@ -217,13 +218,12 @@ export default {
       }
     }).then(function (response) {
       if (response.data.retcode == 'ok') {
-        that.yonghu = that.$store.state.user.userName
+        that.yonghu = that.$store.state.user.userName,
         // var jsonData = JSON.stringify(response.data)
         // alert(jsonData)
 
         that.tableData = response.data.data
-      // } else if (response.data.retcode == '用户未登录，请先登录') {
-      //   alert('用户未登录，请先登录')
+
       } else {
         alert('系统错误，请联系管理员')
       }
